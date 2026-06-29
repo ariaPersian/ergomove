@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'preferences_repository.dart';
 import 'reminder.dart';
 import 'reminder_repository.dart';
+import 'user_preferences.dart';
 
 void main() => runApp(const ErgoMoveApp());
 
@@ -28,9 +30,11 @@ class ReminderHomePage extends StatefulWidget {
   const ReminderHomePage({
     super.key,
     this.repository = const ReminderRepository(),
+    this.preferencesRepository = const PreferencesRepository(),
   });
 
   final ReminderRepository repository;
+  final PreferencesRepository preferencesRepository;
 
   @override
   State<ReminderHomePage> createState() => _ReminderHomePageState();
@@ -58,10 +62,10 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     Duration(minutes: 20),
   ];
 
-  ReminderLanguage _language = ReminderLanguage.fa;
-  String _jobProfile = 'office_computer';
-  Duration _interval = const Duration(seconds: 30);
-  Duration _remaining = const Duration(seconds: 30);
+  ReminderLanguage _language = UserPreferences.initial().language;
+  String _jobProfile = UserPreferences.initial().jobProfile;
+  Duration _interval = UserPreferences.initial().interval;
+  Duration _remaining = UserPreferences.initial().interval;
   Timer? _timer;
   bool _running = false;
   bool _loading = true;
@@ -72,7 +76,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   @override
   void initState() {
     super.initState();
-    _loadReminders();
+    _loadInitialState();
   }
 
   @override
@@ -81,10 +85,28 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     super.dispose();
   }
 
-  Future<void> _loadReminders() async {
-    setState(() => _loading = true);
-    final reminders = await widget.repository.load(_language);
+  Future<void> _loadInitialState() async {
+    final preferences = await widget.preferencesRepository.load();
+    final language = preferences.language;
+    final reminders = await widget.repository.load(language);
+
     if (!mounted) return;
+
+    setState(() {
+      _language = language;
+      _jobProfile = _safeJobProfile(preferences.jobProfile);
+      _interval = _safeInterval(preferences.interval);
+      _remaining = _interval;
+      _reminders = reminders;
+      _nextIndex = 0;
+      _activeReminder = _nextReminder();
+      _loading = false;
+    });
+  }
+
+  Future<void> _loadRemindersForLanguage(ReminderLanguage language) async {
+    final reminders = await widget.repository.load(language);
+    if (!mounted || language != _language) return;
 
     setState(() {
       _reminders = reminders;
@@ -106,6 +128,28 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     final reminder = matching[_nextIndex % matching.length];
     _nextIndex += 1;
     return reminder;
+  }
+
+  String _safeJobProfile(String jobProfile) {
+    if (_jobProfileLabelsEn.containsKey(jobProfile)) return jobProfile;
+    return UserPreferences.initial().jobProfile;
+  }
+
+  Duration _safeInterval(Duration interval) {
+    if (_intervalOptions.contains(interval)) return interval;
+    return UserPreferences.initial().interval;
+  }
+
+  void _savePreferences() {
+    unawaited(
+      widget.preferencesRepository.save(
+        UserPreferences(
+          language: _language,
+          jobProfile: _jobProfile,
+          interval: _interval,
+        ),
+      ),
+    );
   }
 
   void _toggleTimer() {
@@ -148,32 +192,42 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     });
   }
 
-  void _changeLanguage(ReminderLanguage language) {
-    if (_language == language) return;
+  void _changeLanguage(ReminderLanguage? language) {
+    if (language == null || _language == language) return;
     _timer?.cancel();
+
     setState(() {
       _language = language;
       _running = false;
+      _loading = true;
     });
-    _loadReminders();
+
+    _savePreferences();
+    unawaited(_loadRemindersForLanguage(language));
   }
 
   void _changeJobProfile(String? profile) {
     if (profile == null || profile == _jobProfile) return;
+
     setState(() {
-      _jobProfile = profile;
+      _jobProfile = _safeJobProfile(profile);
       _nextIndex = 0;
       _activeReminder = _nextReminder();
       _remaining = _interval;
     });
+
+    _savePreferences();
   }
 
   void _changeInterval(Duration? interval) {
     if (interval == null || interval == _interval) return;
+
     setState(() {
-      _interval = interval;
-      _remaining = interval;
+      _interval = _safeInterval(interval);
+      _remaining = _interval;
     });
+
+    _savePreferences();
   }
 
   String _copy(String en, String fa) => _language == ReminderLanguage.fa ? fa : en;
@@ -212,9 +266,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
               child: DropdownButtonHideUnderline(
                 child: DropdownButton<ReminderLanguage>(
                   value: _language,
-                  onChanged: (value) {
-                    if (value != null) _changeLanguage(value);
-                  },
+                  onChanged: _changeLanguage,
                   items: ReminderLanguage.values
                       .map(
                         (language) => DropdownMenuItem(
