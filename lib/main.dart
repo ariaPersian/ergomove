@@ -295,7 +295,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                         ),
                         const SizedBox(height: 8),
                         DropdownButtonFormField<String>(
-                          value: _jobProfile,
+                          initialValue: _jobProfile,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: _copy('Job type', 'نوع شغل'),
@@ -312,7 +312,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                         ),
                         const SizedBox(height: 16),
                         DropdownButtonFormField<Duration>(
-                          value: _interval,
+                          initialValue: _interval,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: _copy('Reminder interval', 'فاصله یادآوری'),
