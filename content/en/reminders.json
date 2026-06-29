@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -9,13 +9,13 @@
       "interval_minutes": 20,
       "duration_seconds": 20,
       "title": "Eye break",
-      "body": "Look away from the screen and focus on a distant object for 20 seconds.",
+      "body": "Look away from the screen and focus on a distant object for 20 seconds. Blink slowly and let your eyes relax.",
       "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional."
     },
     {
       "id": "posture-neutral-sitting",
       "category": "posture",
-      "job_profiles": ["office_computer", "call_center"],
+      "job_profiles": ["office_computer", "call_center", "control_room"],
       "interval_minutes": 45,
       "duration_seconds": 30,
       "title": "Posture reset",
@@ -31,6 +31,56 @@
       "title": "Move for a minute",
       "body": "Stand up, walk gently, and loosen your hips and back before returning to work.",
       "safety_note": "Move within your safe range and workplace rules."
+    },
+    {
+      "id": "neck-shoulder-release",
+      "category": "neck_shoulders",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 60,
+      "duration_seconds": 30,
+      "title": "Neck and shoulder release",
+      "body": "Let your arms rest at your sides. Gently roll your shoulders back, then bring your head back to a comfortable neutral position.",
+      "safety_note": "Keep the movement gentle. Stop if you feel dizziness, tingling, sharp pain, or worsening symptoms."
+    },
+    {
+      "id": "wrists-hands-reset",
+      "category": "wrists_hands",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "Hands and wrists reset",
+      "body": "Take your hands off the keyboard or mouse. Open and close your hands slowly, then return with wrists straight and relaxed.",
+      "safety_note": "Avoid forceful stretching. Persistent numbness, weakness, or pain should be checked by a qualified clinician."
+    },
+    {
+      "id": "call-center-voice-breath",
+      "category": "breathing",
+      "job_profiles": ["call_center"],
+      "interval_minutes": 60,
+      "duration_seconds": 30,
+      "title": "Voice and breathing reset",
+      "body": "Pause between calls when possible. Relax your jaw, lower your shoulders, and take two slow nasal breaths before the next task.",
+      "safety_note": "This is a general comfort prompt. Follow your workplace procedures and seek professional care for persistent voice or breathing symptoms."
+    },
+    {
+      "id": "control-room-scan-posture",
+      "category": "attention_posture",
+      "job_profiles": ["control_room"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "Control-room posture scan",
+      "body": "Before the next monitoring cycle, check that your screens are easy to view, your shoulders are relaxed, and your feet are supported.",
+      "safety_note": "Do not interrupt safety-critical monitoring. Use this prompt only when operationally safe."
+    },
+    {
+      "id": "driver-parking-mobility",
+      "category": "driver_mobility",
+      "job_profiles": ["driver"],
+      "interval_minutes": 120,
+      "duration_seconds": 60,
+      "title": "Parked mobility break",
+      "body": "When parked safely, step out if permitted, walk briefly, and move your ankles, hips, and shoulders before driving again.",
+      "safety_note": "Never do this while driving. Follow road, site, and employer safety rules."
     }
   ]
 }
