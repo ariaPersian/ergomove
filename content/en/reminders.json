@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -10,7 +10,10 @@
       "duration_seconds": 20,
       "title": "Eye break",
       "body": "Look away from the screen and focus on a distant object for 20 seconds. Blink slowly and let your eyes relax.",
-      "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional."
+      "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/eye_break.svg",
+      "visual_description": "Illustration of a screen and relaxed eyes for the 20-second eye break."
     },
     {
       "id": "posture-neutral-sitting",
@@ -20,7 +23,10 @@
       "duration_seconds": 30,
       "title": "Posture reset",
       "body": "Relax your shoulders. Keep your head level, wrists straight, elbows close, and both feet fully supported.",
-      "safety_note": "Do not force a position that causes pain. Adjust workstation equipment where possible."
+      "safety_note": "Do not force a position that causes pain. Adjust workstation equipment where possible.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/posture_reset.svg",
+      "visual_description": "Illustration of a person sitting with a neutral upright posture."
     },
     {
       "id": "movement-stand-walk",
@@ -30,7 +36,10 @@
       "duration_seconds": 60,
       "title": "Move for a minute",
       "body": "Stand up, walk gently, and loosen your hips and back before returning to work.",
-      "safety_note": "Move within your safe range and workplace rules."
+      "safety_note": "Move within your safe range and workplace rules.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/movement_walk.svg",
+      "visual_description": "Illustration of gentle walking for a short movement break."
     },
     {
       "id": "neck-shoulder-release",
@@ -40,7 +49,10 @@
       "duration_seconds": 30,
       "title": "Neck and shoulder release",
       "body": "Let your arms rest at your sides. Gently roll your shoulders back, then bring your head back to a comfortable neutral position.",
-      "safety_note": "Keep the movement gentle. Stop if you feel dizziness, tingling, sharp pain, or worsening symptoms."
+      "safety_note": "Keep the movement gentle. Stop if you feel dizziness, tingling, sharp pain, or worsening symptoms.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/neck_shoulders.svg",
+      "visual_description": "Illustration of gentle shoulder release and neutral neck posture."
     },
     {
       "id": "wrists-hands-reset",
@@ -50,7 +62,10 @@
       "duration_seconds": 30,
       "title": "Hands and wrists reset",
       "body": "Take your hands off the keyboard or mouse. Open and close your hands slowly, then return with wrists straight and relaxed.",
-      "safety_note": "Avoid forceful stretching. Persistent numbness, weakness, or pain should be checked by a qualified clinician."
+      "safety_note": "Avoid forceful stretching. Persistent numbness, weakness, or pain should be checked by a qualified clinician.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/wrists_hands.svg",
+      "visual_description": "Illustration of open hands for a wrist and hand reset."
     },
     {
       "id": "call-center-voice-breath",
@@ -60,7 +75,10 @@
       "duration_seconds": 30,
       "title": "Voice and breathing reset",
       "body": "Pause between calls when possible. Relax your jaw, lower your shoulders, and take two slow nasal breaths before the next task.",
-      "safety_note": "This is a general comfort prompt. Follow your workplace procedures and seek professional care for persistent voice or breathing symptoms."
+      "safety_note": "This is a general comfort prompt. Follow your workplace procedures and seek professional care for persistent voice or breathing symptoms.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/breathing.svg",
+      "visual_description": "Illustration of calm breathing for a short reset."
     },
     {
       "id": "control-room-scan-posture",
@@ -70,7 +88,10 @@
       "duration_seconds": 30,
       "title": "Control-room posture scan",
       "body": "Before the next monitoring cycle, check that your screens are easy to view, your shoulders are relaxed, and your feet are supported.",
-      "safety_note": "Do not interrupt safety-critical monitoring. Use this prompt only when operationally safe."
+      "safety_note": "Do not interrupt safety-critical monitoring. Use this prompt only when operationally safe.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/control_room.svg",
+      "visual_description": "Illustration of screen monitoring with neutral posture."
     },
     {
       "id": "driver-parking-mobility",
@@ -80,7 +101,10 @@
       "duration_seconds": 60,
       "title": "Parked mobility break",
       "body": "When parked safely, step out if permitted, walk briefly, and move your ankles, hips, and shoulders before driving again.",
-      "safety_note": "Never do this while driving. Follow road, site, and employer safety rules."
+      "safety_note": "Never do this while driving. Follow road, site, and employer safety rules.",
+      "visual_type": "static_svg",
+      "visual_asset": "assets/images/parked_mobility.svg",
+      "visual_description": "Illustration of a safe stopped mobility break."
     }
   ]
 }
