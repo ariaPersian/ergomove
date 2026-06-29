@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#ECEFF1"/>
+  <rect x="52" y="42" width="88" height="58" rx="8" fill="#FFFFFF" stroke="#455A64" stroke-width="6"/>
+  <rect x="180" y="42" width="88" height="58" rx="8" fill="#FFFFFF" stroke="#455A64" stroke-width="6"/>
+  <path d="M70 78h54M198 78h54" stroke="#00ACC1" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="160" cy="108" r="20" fill="#455A64"/>
+  <path d="M160 132v38" stroke="#263238" stroke-width="10" stroke-linecap="round"/>
+  <path d="M126 150h68" stroke="#607D8B" stroke-width="10" stroke-linecap="round"/>
+  <path d="M140 170l-28 22" stroke="#455A64" stroke-width="9" stroke-linecap="round"/>
+  <path d="M180 170l28 22" stroke="#455A64" stroke-width="9" stroke-linecap="round"/>
+  <text x="160" y="205" text-anchor="middle" font-family="Arial" font-size="18" fill="#263238">screen posture</text>
+</svg>
