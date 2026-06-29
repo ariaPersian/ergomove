@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#FFF3E0"/>
+  <circle cx="160" cy="50" r="22" fill="#E65100"/>
+  <path d="M160 74v46" stroke="#BF360C" stroke-width="10" stroke-linecap="round"/>
+  <path d="M105 125c35-20 75-20 110 0" fill="none" stroke="#F57C00" stroke-width="12" stroke-linecap="round"/>
+  <path d="M112 128l-20 34" stroke="#E65100" stroke-width="10" stroke-linecap="round"/>
+  <path d="M208 128l20 34" stroke="#E65100" stroke-width="10" stroke-linecap="round"/>
+  <path d="M93 76c-18 18-18 42 0 60" fill="none" stroke="#FB8C00" stroke-width="8" stroke-linecap="round"/>
+  <path d="M227 76c18 18 18 42 0 60" fill="none" stroke="#FB8C00" stroke-width="8" stroke-linecap="round"/>
+  <text x="160" y="200" text-anchor="middle" font-family="Arial" font-size="18" fill="#BF360C">shoulder release</text>
+</svg>
