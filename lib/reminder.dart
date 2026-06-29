@@ -25,6 +25,9 @@ class Reminder {
     required this.title,
     required this.body,
     required this.safetyNote,
+    this.visualAsset,
+    this.visualType = 'static_svg',
+    this.visualDescription,
   });
 
   final String id;
@@ -35,6 +38,9 @@ class Reminder {
   final String title;
   final String body;
   final String safetyNote;
+  final String? visualAsset;
+  final String visualType;
+  final String? visualDescription;
 
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
@@ -48,6 +54,9 @@ class Reminder {
       title: json['title'] as String? ?? '',
       body: json['body'] as String? ?? '',
       safetyNote: json['safety_note'] as String? ?? '',
+      visualAsset: json['visual_asset'] as String?,
+      visualType: json['visual_type'] as String? ?? 'static_svg',
+      visualDescription: json['visual_description'] as String?,
     );
   }
 
