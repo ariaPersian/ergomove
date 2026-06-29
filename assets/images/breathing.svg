@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220">
+  <rect width="320" height="220" rx="28" fill="#E8EAF6"/>
+  <circle cx="160" cy="48" r="22" fill="#303F9F"/>
+  <path d="M160 72v68" stroke="#1A237E" stroke-width="10" stroke-linecap="round"/>
+  <path d="M120 116c18-18 62-18 80 0" fill="none" stroke="#5C6BC0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M102 86c-24 24-24 60 0 84" fill="none" stroke="#7986CB" stroke-width="7" stroke-linecap="round"/>
+  <path d="M218 86c24 24 24 60 0 84" fill="none" stroke="#7986CB" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="100" cy="128" r="8" fill="#3F51B5"/>
+  <circle cx="220" cy="128" r="8" fill="#3F51B5"/>
+  <text x="160" y="200" text-anchor="middle" font-family="Arial" font-size="18" fill="#1A237E">slow breathing</text>
+</svg>
