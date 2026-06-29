@@ -14,7 +14,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('ErgoMove'), findsOneWidget);
-    expect(find.text('شروع'), findsOneWidget);
+    expect(find.text('پروفایل کاری'), findsOneWidget);
+    expect(find.text('یادآور بعدی تا'), findsOneWidget);
     expect(find.byIcon(Icons.play_arrow), findsOneWidget);
   });
 }
