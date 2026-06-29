@@ -1,0 +1,18 @@
+name: ergomove
+version: 0.1.0+1
+description: Bilingual ergonomic break reminder app for office and computer workers.
+publish_to: "none"
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+flutter:
+  uses-material-design: true
+  assets:
+    - content/en/reminders.json
+    - content/fa/reminders.json

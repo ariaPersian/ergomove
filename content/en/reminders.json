@@ -1,0 +1,36 @@
+{
+  "language": "en",
+  "version": "0.1.0",
+  "reminders": [
+    {
+      "id": "eye-20-20-20",
+      "category": "eyes",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 20,
+      "duration_seconds": 20,
+      "title": "Eye break",
+      "body": "Look away from the screen and focus on a distant object for 20 seconds.",
+      "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional."
+    },
+    {
+      "id": "posture-neutral-sitting",
+      "category": "posture",
+      "job_profiles": ["office_computer", "call_center"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "Posture reset",
+      "body": "Relax your shoulders. Keep your head level, wrists straight, elbows close, and both feet fully supported.",
+      "safety_note": "Do not force a position that causes pain. Adjust workstation equipment where possible."
+    },
+    {
+      "id": "movement-stand-walk",
+      "category": "movement",
+      "job_profiles": ["office_computer", "control_room", "driver"],
+      "interval_minutes": 60,
+      "duration_seconds": 60,
+      "title": "Move for a minute",
+      "body": "Stand up, walk gently, and loosen your hips and back before returning to work.",
+      "safety_note": "Move within your safe range and workplace rules."
+    }
+  ]
+}

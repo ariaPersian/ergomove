@@ -1,0 +1,36 @@
+{
+  "language": "fa",
+  "version": "0.1.0",
+  "reminders": [
+    {
+      "id": "eye-20-20-20",
+      "category": "eyes",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 20,
+      "duration_seconds": 20,
+      "title": "استراحت چشم",
+      "body": "۲۰ ثانیه از صفحه‌نمایش دور شوید و به یک نقطه دور نگاه کنید.",
+      "safety_note": "این فقط راهنمای عمومی بهداشت بینایی است و جایگزین توصیه پزشک یا اپتومتریست نیست."
+    },
+    {
+      "id": "posture-neutral-sitting",
+      "category": "posture",
+      "job_profiles": ["office_computer", "call_center"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "اصلاح وضعیت نشستن",
+      "body": "شانه‌ها را رها کنید. سر را صاف نگه دارید، مچ‌ها را خم نکنید، آرنج‌ها نزدیک بدن باشند و کف پاها کامل حمایت شوند.",
+      "safety_note": "هیچ وضعیتی را با فشار یا درد انجام ندهید. در صورت امکان میز، صندلی، مانیتور و تجهیزات را تنظیم کنید."
+    },
+    {
+      "id": "movement-stand-walk",
+      "category": "movement",
+      "job_profiles": ["office_computer", "control_room", "driver"],
+      "interval_minutes": 60,
+      "duration_seconds": 60,
+      "title": "یک دقیقه حرکت",
+      "body": "بلند شوید، آرام راه بروید و لگن و کمر را کمی آزاد کنید، بعد به کار برگردید.",
+      "safety_note": "حرکت را در محدوده امن بدن و قوانین محیط کار انجام دهید."
+    }
+  ]
+}
