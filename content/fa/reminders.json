@@ -1,6 +1,6 @@
 {
   "language": "fa",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -9,13 +9,13 @@
       "interval_minutes": 20,
       "duration_seconds": 20,
       "title": "استراحت چشم",
-      "body": "۲۰ ثانیه از صفحه‌نمایش دور شوید و به یک نقطه دور نگاه کنید.",
+      "body": "۲۰ ثانیه از صفحه‌نمایش دور شوید و به یک نقطه دور نگاه کنید. چند بار آرام پلک بزنید و اجازه دهید چشم‌ها رها شوند.",
       "safety_note": "این فقط راهنمای عمومی بهداشت بینایی است و جایگزین توصیه پزشک یا اپتومتریست نیست."
     },
     {
       "id": "posture-neutral-sitting",
       "category": "posture",
-      "job_profiles": ["office_computer", "call_center"],
+      "job_profiles": ["office_computer", "call_center", "control_room"],
       "interval_minutes": 45,
       "duration_seconds": 30,
       "title": "اصلاح وضعیت نشستن",
@@ -31,6 +31,56 @@
       "title": "یک دقیقه حرکت",
       "body": "بلند شوید، آرام راه بروید و لگن و کمر را کمی آزاد کنید، بعد به کار برگردید.",
       "safety_note": "حرکت را در محدوده امن بدن و قوانین محیط کار انجام دهید."
+    },
+    {
+      "id": "neck-shoulder-release",
+      "category": "neck_shoulders",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 60,
+      "duration_seconds": 30,
+      "title": "رهاسازی گردن و شانه",
+      "body": "دست‌ها را کنار بدن رها کنید. شانه‌ها را آرام به عقب بچرخانید و سپس سر را در وضعیت راحت و خنثی نگه دارید.",
+      "safety_note": "حرکت باید آرام باشد. در صورت سرگیجه، گزگز، درد تیز یا بدتر شدن علائم، توقف کنید."
+    },
+    {
+      "id": "wrists-hands-reset",
+      "category": "wrists_hands",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "استراحت دست و مچ",
+      "body": "دست‌ها را از کیبورد یا ماوس بردارید. انگشت‌ها را چند بار آرام باز و بسته کنید و سپس با مچ صاف و رها به کار برگردید.",
+      "safety_note": "کشش شدید انجام ندهید. بی‌حسی، ضعف یا درد مداوم باید توسط متخصص بررسی شود."
+    },
+    {
+      "id": "call-center-voice-breath",
+      "category": "breathing",
+      "job_profiles": ["call_center"],
+      "interval_minutes": 60,
+      "duration_seconds": 30,
+      "title": "تنفس و استراحت صدا",
+      "body": "در فاصله بین تماس‌ها، فک را رها کنید، شانه‌ها را پایین بیاورید و دو نفس آرام از بینی بکشید.",
+      "safety_note": "این فقط یادآوری عمومی برای راحتی است. برای علائم مداوم صدا یا تنفس با متخصص مشورت کنید."
+    },
+    {
+      "id": "control-room-scan-posture",
+      "category": "attention_posture",
+      "job_profiles": ["control_room"],
+      "interval_minutes": 45,
+      "duration_seconds": 30,
+      "title": "بررسی وضعیت در اتاق کنترل",
+      "body": "پیش از چرخه بعدی پایش، بررسی کنید صفحه‌ها راحت دیده می‌شوند، شانه‌ها رها هستند و پاها حمایت می‌شوند.",
+      "safety_note": "پایش ایمنی‌محور را قطع نکنید. فقط زمانی از این یادآوری استفاده کنید که از نظر عملیاتی ایمن باشد."
+    },
+    {
+      "id": "driver-parking-mobility",
+      "category": "driver_mobility",
+      "job_profiles": ["driver"],
+      "interval_minutes": 120,
+      "duration_seconds": 60,
+      "title": "حرکت کوتاه هنگام توقف ایمن",
+      "body": "وقتی خودرو در محل امن متوقف است و مجاز هستید، کمی قدم بزنید و مچ پا، لگن و شانه‌ها را پیش از رانندگی دوباره حرکت دهید.",
+      "safety_note": "این کار را هرگز هنگام رانندگی انجام ندهید. قوانین راه، محل کار و کارفرما را رعایت کنید."
     }
   ]
 }
