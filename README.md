@@ -8,7 +8,7 @@ The repository is designed to start as a Flutter MVP and later expand to Android
 
 ## Current implementation status
 
-The current Windows MVP has been locally validated with:
+The previous Windows MVP has been locally validated with:
 
 ```powershell
 flutter pub get
@@ -17,7 +17,7 @@ flutter test
 flutter run -d windows
 ```
 
-Validated features:
+Validated features before the latest desktop popup change:
 
 - Flutter Material 3 app shell.
 - English/Persian language switch with RTL support for Persian.
@@ -27,9 +27,17 @@ Validated features:
 - Start, pause, reset, and show-next controls.
 - Persistent language/profile/interval preferences.
 - Reminder SVG visuals shown in the main reminder card.
-- In-app reminder popup overlay with reminder visual, title, body, and safety note.
 - Windows system tray behavior: close/minimize hides the app to tray; explicit `Exit` from tray terminates the app.
 - Analyzer and test suite pass locally on Windows.
+
+Latest desktop popup work:
+
+- Reminder popup was moved from an overlay inside the main Flutter view to a dedicated desktop popup view.
+- The popup receives a serialized reminder payload through `lib/reminder_popup_args.dart`.
+- The popup is configured as always-on-top, fixed-size, hidden from taskbar, and bottom-right aligned near the Windows clock / system tray.
+- The popup auto-dismisses after 15 seconds or when dismissed manually.
+
+After pulling the latest changes, rerun validation because a new desktop popup dependency was added.
 
 ## Desktop behavior
 
@@ -47,20 +55,20 @@ The current implementation lives in:
 
 - `lib/desktop_shell_controller.dart`
 
-## Reminder popup direction
+## Reminder popup behavior
 
-Windows native notifications are not the final UX target. ErgoMove should show its own calm popup with the exercise visual.
+Windows native notifications are not the final UX target. ErgoMove shows its own calm popup with the exercise visual.
 
-Current status:
+Current implementation:
 
-- The app shows an ErgoMove-owned popup overlay inside the Flutter window.
+- The app creates a dedicated reminder popup view using `desktop_multi_window`.
+- The popup uses the same `ReminderPopup` and `ReminderArt` widgets as the in-app reminder content.
+- The default popup position is bottom-right, near the Windows clock / system tray.
 
-Target behavior:
+Future behavior:
 
-- The popup should become an independent desktop popup window.
-- Default position should be near the Windows clock / system tray.
 - The user should later be able to choose the popup position, such as bottom-right, bottom-left, top-right, or top-left.
-- The popup should show the same exercise image or animation as the main card.
+- The popup should support more natural animated movement assets.
 
 See:
 
@@ -108,6 +116,7 @@ See:
 - `shared_preferences` for lightweight local settings.
 - `tray_manager` for system tray integration.
 - `window_manager` for desktop window lifecycle behavior.
+- `desktop_multi_window` for the independent reminder popup.
 - Lottie / animated assets later for natural movement guidance.
 - GitHub Actions for analysis/tests.
 
@@ -146,7 +155,7 @@ Manual desktop checks:
 2. Timer starts and counts down.
 3. `Show next` changes the reminder card.
 4. Reminder visual appears in the card.
-5. Reminder popup appears and can be dismissed.
+5. Reminder popup appears near the Windows clock / system tray and can be dismissed.
 6. Closing the main window hides the app to tray.
 7. Minimizing the main window hides the app to tray.
 8. Tray icon is visible.
