@@ -2,22 +2,17 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-import 'local_alerts.dart';
+import 'desktop_shell_controller.dart';
 import 'preferences_repository.dart';
 import 'reminder.dart';
 import 'reminder_art.dart';
+import 'reminder_popup.dart';
 import 'reminder_repository.dart';
 import 'user_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  try {
-    await const LocalAlerts().initialize();
-  } catch (_) {
-    // The app still works with in-app reminders when system alerts are unavailable.
-  }
-
+  await DesktopShellController.instance.initialize();
   runApp(const ErgoMoveApp());
 }
 
@@ -43,12 +38,10 @@ class ReminderHomePage extends StatefulWidget {
     super.key,
     this.repository = const ReminderRepository(),
     this.preferencesRepository = const PreferencesRepository(),
-    this.localAlerts = const LocalAlerts(),
   });
 
   final ReminderRepository repository;
   final PreferencesRepository preferencesRepository;
-  final LocalAlerts localAlerts;
 
   @override
   State<ReminderHomePage> createState() => _ReminderHomePageState();
@@ -81,11 +74,13 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   Duration _interval = UserPreferences.initial().interval;
   Duration _remaining = UserPreferences.initial().interval;
   Timer? _timer;
+  Timer? _popupTimer;
   bool _running = false;
   bool _loading = true;
   List<Reminder> _reminders = const [];
   int _nextIndex = 0;
   Reminder? _activeReminder;
+  Reminder? _popupReminder;
 
   @override
   void initState() {
@@ -96,6 +91,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   @override
   void dispose() {
     _timer?.cancel();
+    _popupTimer?.cancel();
     super.dispose();
   }
 
@@ -166,12 +162,21 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     );
   }
 
-  void _showLocalAlert(Reminder reminder) {
-    try {
-      widget.localAlerts.showReminder(reminder);
-    } catch (_) {
-      // The visual timer card remains the source of truth if a system alert fails.
-    }
+  void _showReminderPopup(Reminder reminder) {
+    _popupTimer?.cancel();
+
+    if (!mounted) return;
+
+    setState(() => _popupReminder = reminder);
+    _popupTimer = Timer(const Duration(seconds: 15), _dismissReminderPopup);
+  }
+
+  void _dismissReminderPopup() {
+    _popupTimer?.cancel();
+
+    if (!mounted) return;
+
+    setState(() => _popupReminder = null);
   }
 
   void _toggleTimer() {
@@ -189,21 +194,21 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   void _tick() {
     if (!mounted) return;
 
-    Reminder? reminderToAlert;
+    Reminder? reminderToShow;
 
     setState(() {
       if (_remaining.inSeconds <= 1) {
-        reminderToAlert = _nextReminder();
-        _activeReminder = reminderToAlert;
+        reminderToShow = _nextReminder();
+        _activeReminder = reminderToShow;
         _remaining = _interval;
       } else {
         _remaining -= const Duration(seconds: 1);
       }
     });
 
-    final reminder = reminderToAlert;
+    final reminder = reminderToShow;
     if (reminder != null) {
-      _showLocalAlert(reminder);
+      _showReminderPopup(reminder);
     }
   }
 
@@ -226,7 +231,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
 
     final reminder = nextReminder;
     if (reminder != null) {
-      _showLocalAlert(reminder);
+      _showReminderPopup(reminder);
     }
   }
 
@@ -297,178 +302,198 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     final textDirection =
         _language.isRtl ? TextDirection.rtl : TextDirection.ltr;
     final reminder = _activeReminder;
+    final popupReminder = _popupReminder;
 
     return Directionality(
       textDirection: textDirection,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('ErgoMove'),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.only(end: 12),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<ReminderLanguage>(
-                  value: _language,
-                  onChanged: _changeLanguage,
-                  items: ReminderLanguage.values
-                      .map(
-                        (language) => DropdownMenuItem(
-                          value: language,
-                          child: Text(language.label),
-                        ),
-                      )
-                      .toList(growable: false),
+      child: Stack(
+        children: [
+          Scaffold(
+            appBar: AppBar(
+              title: const Text('ErgoMove'),
+              actions: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(end: 12),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<ReminderLanguage>(
+                      value: _language,
+                      onChanged: _changeLanguage,
+                      items: ReminderLanguage.values
+                          .map(
+                            (language) => DropdownMenuItem(
+                              value: language,
+                              child: Text(language.label),
+                            ),
+                          )
+                          .toList(growable: false),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
-        body: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 840),
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: _loading
-                  ? const CircularProgressIndicator()
-                  : ListView(
-                      children: [
-                        Text(
-                          _copy('Work profile', 'پروفایل کاری'),
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                        const SizedBox(height: 8),
-                        DropdownButtonFormField<String>(
-                          initialValue: _jobProfile,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText: _copy('Job type', 'نوع شغل'),
-                          ),
-                          onChanged: _changeJobProfile,
-                          items: _jobProfileLabelsEn.keys
-                              .map(
-                                (profile) => DropdownMenuItem(
-                                  value: profile,
-                                  child: Text(_jobLabel(profile)),
+            body: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 840),
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: _loading
+                      ? const CircularProgressIndicator()
+                      : ListView(
+                          children: [
+                            Text(
+                              _copy('Work profile', 'پروفایل کاری'),
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 8),
+                            DropdownButtonFormField<String>(
+                              initialValue: _jobProfile,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText: _copy('Job type', 'نوع شغل'),
+                              ),
+                              onChanged: _changeJobProfile,
+                              items: _jobProfileLabelsEn.keys
+                                  .map(
+                                    (profile) => DropdownMenuItem(
+                                      value: profile,
+                                      child: Text(_jobLabel(profile)),
+                                    ),
+                                  )
+                                  .toList(growable: false),
+                            ),
+                            const SizedBox(height: 16),
+                            DropdownButtonFormField<Duration>(
+                              initialValue: _interval,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                labelText:
+                                    _copy('Reminder interval', 'فاصله یادآوری'),
+                              ),
+                              onChanged: _changeInterval,
+                              items: _intervalOptions
+                                  .map(
+                                    (interval) => DropdownMenuItem(
+                                      value: interval,
+                                      child: Text(_intervalLabel(interval)),
+                                    ),
+                                  )
+                                  .toList(growable: false),
+                            ),
+                            const SizedBox(height: 24),
+                            Card(
+                              child: Padding(
+                                padding: const EdgeInsets.all(24),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Text(
+                                      _copy('Next reminder in', 'یادآور بعدی تا'),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      _formatDuration(_remaining),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displayMedium,
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      _running
+                                          ? _copy('Timer is running',
+                                              'تایمر فعال است')
+                                          : _copy('Timer is paused',
+                                              'تایمر متوقف است'),
+                                    ),
+                                  ],
                                 ),
-                              )
-                              .toList(growable: false),
-                        ),
-                        const SizedBox(height: 16),
-                        DropdownButtonFormField<Duration>(
-                          initialValue: _interval,
-                          decoration: InputDecoration(
-                            border: const OutlineInputBorder(),
-                            labelText:
-                                _copy('Reminder interval', 'فاصله یادآوری'),
-                          ),
-                          onChanged: _changeInterval,
-                          items: _intervalOptions
-                              .map(
-                                (interval) => DropdownMenuItem(
-                                  value: interval,
-                                  child: Text(_intervalLabel(interval)),
-                                ),
-                              )
-                              .toList(growable: false),
-                        ),
-                        const SizedBox(height: 24),
-                        Card(
-                          child: Padding(
-                            padding: const EdgeInsets.all(24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Card.filled(
+                              child: Padding(
+                                padding: const EdgeInsets.all(24),
+                                child: reminder == null
+                                    ? Text(_copy(
+                                        'No reminder is available for this profile.',
+                                        'برای این پروفایل کاری یادآوری موجود نیست.',
+                                      ))
+                                    : Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ReminderArt(reminder: reminder),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            reminder.title,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall,
+                                          ),
+                                          const SizedBox(height: 12),
+                                          Text(
+                                            reminder.body,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          Text(
+                                            reminder.safetyNote,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall,
+                                          ),
+                                        ],
+                                      ),
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            Wrap(
+                              spacing: 12,
+                              runSpacing: 12,
                               children: [
-                                Text(
-                                  _copy('Next reminder in', 'یادآور بعدی تا'),
-                                  style: Theme.of(context).textTheme.titleLarge,
+                                FilledButton.icon(
+                                  onPressed: _toggleTimer,
+                                  icon: Icon(_running
+                                      ? Icons.pause
+                                      : Icons.play_arrow),
+                                  label: Text(_running
+                                      ? _copy('Pause', 'توقف')
+                                      : _copy('Start', 'شروع')),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  _formatDuration(_remaining),
-                                  style:
-                                      Theme.of(context).textTheme.displayMedium,
+                                OutlinedButton.icon(
+                                  onPressed: _resetTimer,
+                                  icon: const Icon(Icons.restart_alt),
+                                  label: Text(_copy('Reset', 'بازنشانی')),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  _running
-                                      ? _copy(
-                                          'Timer is running', 'تایمر فعال است')
-                                      : _copy(
-                                          'Timer is paused', 'تایمر متوقف است'),
+                                OutlinedButton.icon(
+                                  onPressed: _showNextReminderNow,
+                                  icon: const Icon(Icons.skip_next),
+                                  label: Text(_copy('Show next', 'نمایش بعدی')),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Card.filled(
-                          child: Padding(
-                            padding: const EdgeInsets.all(24),
-                            child: reminder == null
-                                ? Text(_copy(
-                                    'No reminder is available for this profile.',
-                                    'برای این پروفایل کاری یادآوری موجود نیست.',
-                                  ))
-                                : Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ReminderArt(reminder: reminder),
-                                      const SizedBox(height: 16),
-                                      Text(
-                                        reminder.title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall,
-                                      ),
-                                      const SizedBox(height: 12),
-                                      Text(
-                                        reminder.body,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Text(
-                                        reminder.safetyNote,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ],
-                                  ),
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        Wrap(
-                          spacing: 12,
-                          runSpacing: 12,
-                          children: [
-                            FilledButton.icon(
-                              onPressed: _toggleTimer,
-                              icon: Icon(
-                                  _running ? Icons.pause : Icons.play_arrow),
-                              label: Text(_running
-                                  ? _copy('Pause', 'توقف')
-                                  : _copy('Start', 'شروع')),
-                            ),
-                            OutlinedButton.icon(
-                              onPressed: _resetTimer,
-                              icon: const Icon(Icons.restart_alt),
-                              label: Text(_copy('Reset', 'بازنشانی')),
-                            ),
-                            OutlinedButton.icon(
-                              onPressed: _showNextReminderNow,
-                              icon: const Icon(Icons.skip_next),
-                              label: Text(_copy('Show next', 'نمایش بعدی')),
-                            ),
                           ],
                         ),
-                      ],
-                    ),
+                ),
+              ),
             ),
           ),
-        ),
+          if (popupReminder != null)
+            PositionedDirectional(
+              end: 24,
+              bottom: 24,
+              child: SafeArea(
+                child: ReminderPopup(
+                  reminder: popupReminder,
+                  onDismiss: _dismissReminderPopup,
+                ),
+              ),
+            ),
+        ],
       ),
     );
   }
