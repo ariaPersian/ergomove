@@ -230,10 +230,13 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     _savePreferences();
   }
 
-  String _copy(String en, String fa) => _language == ReminderLanguage.fa ? fa : en;
+  String _copy(String en, String fa) =>
+      _language == ReminderLanguage.fa ? fa : en;
 
   String _jobLabel(String value) {
-    final labels = _language == ReminderLanguage.fa ? _jobProfileLabelsFa : _jobProfileLabelsEn;
+    final labels = _language == ReminderLanguage.fa
+        ? _jobProfileLabelsFa
+        : _jobProfileLabelsEn;
     return labels[value] ?? value;
   }
 
@@ -247,12 +250,14 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     if (duration.inSeconds == 30) {
       return _copy('30 seconds demo', '۳۰ ثانیه آزمایشی');
     }
-    return _copy('${duration.inMinutes} minutes', '${duration.inMinutes} دقیقه');
+    return _copy(
+        '${duration.inMinutes} minutes', '${duration.inMinutes} دقیقه');
   }
 
   @override
   Widget build(BuildContext context) {
-    final textDirection = _language.isRtl ? TextDirection.rtl : TextDirection.ltr;
+    final textDirection =
+        _language.isRtl ? TextDirection.rtl : TextDirection.ltr;
     final reminder = _activeReminder;
 
     return Directionality(
@@ -315,7 +320,8 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                           initialValue: _interval,
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
-                            labelText: _copy('Reminder interval', 'فاصله یادآوری'),
+                            labelText:
+                                _copy('Reminder interval', 'فاصله یادآوری'),
                           ),
                           onChanged: _changeInterval,
                           items: _intervalOptions
@@ -341,13 +347,16 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                                 const SizedBox(height: 8),
                                 Text(
                                   _formatDuration(_remaining),
-                                  style: Theme.of(context).textTheme.displayMedium,
+                                  style:
+                                      Theme.of(context).textTheme.displayMedium,
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
                                   _running
-                                      ? _copy('Timer is running', 'تایمر فعال است')
-                                      : _copy('Timer is paused', 'تایمر متوقف است'),
+                                      ? _copy(
+                                          'Timer is running', 'تایمر فعال است')
+                                      : _copy(
+                                          'Timer is paused', 'تایمر متوقف است'),
                                 ),
                               ],
                             ),
@@ -363,21 +372,28 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                                     'برای این پروفایل کاری یادآوری موجود نیست.',
                                   ))
                                 : Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         reminder.title,
-                                        style: Theme.of(context).textTheme.headlineSmall,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headlineSmall,
                                       ),
                                       const SizedBox(height: 12),
                                       Text(
                                         reminder.body,
-                                        style: Theme.of(context).textTheme.bodyLarge,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyLarge,
                                       ),
                                       const SizedBox(height: 16),
                                       Text(
                                         reminder.safetyNote,
-                                        style: Theme.of(context).textTheme.bodySmall,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall,
                                       ),
                                     ],
                                   ),
@@ -390,8 +406,11 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                           children: [
                             FilledButton.icon(
                               onPressed: _toggleTimer,
-                              icon: Icon(_running ? Icons.pause : Icons.play_arrow),
-                              label: Text(_running ? _copy('Pause', 'توقف') : _copy('Start', 'شروع')),
+                              icon: Icon(
+                                  _running ? Icons.pause : Icons.play_arrow),
+                              label: Text(_running
+                                  ? _copy('Pause', 'توقف')
+                                  : _copy('Start', 'شروع')),
                             ),
                             OutlinedButton.icon(
                               onPressed: _resetTimer,

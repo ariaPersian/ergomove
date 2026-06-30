@@ -15,20 +15,40 @@ void main() {
   });
 
   test('each reminder has required safe content fields', () {
-    for (final path in ['content/en/reminders.json', 'content/fa/reminders.json']) {
+    for (final path in [
+      'content/en/reminders.json',
+      'content/fa/reminders.json'
+    ]) {
       final catalog = _readCatalog(path);
       final reminders = catalog['reminders'] as List<dynamic>;
 
       expect(reminders, isNotEmpty, reason: path);
 
       for (final item in reminders.cast<Map<String, dynamic>>()) {
-        expect(item['id'], isA<String>().having((value) => value.isNotEmpty, 'not empty', true));
-        expect(item['title'], isA<String>().having((value) => value.isNotEmpty, 'not empty', true));
-        expect(item['body'], isA<String>().having((value) => value.isNotEmpty, 'not empty', true));
-        expect(item['safety_note'], isA<String>().having((value) => value.isNotEmpty, 'not empty', true));
-        expect(item['job_profiles'], isA<List<dynamic>>().having((value) => value.isNotEmpty, 'not empty', true));
-        expect(item['interval_minutes'], isA<int>().having((value) => value > 0, 'positive', true));
-        expect(item['duration_seconds'], isA<int>().having((value) => value > 0, 'positive', true));
+        expect(
+            item['id'],
+            isA<String>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(
+            item['title'],
+            isA<String>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(
+            item['body'],
+            isA<String>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(
+            item['safety_note'],
+            isA<String>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(
+            item['job_profiles'],
+            isA<List<dynamic>>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(item['interval_minutes'],
+            isA<int>().having((value) => value > 0, 'positive', true));
+        expect(item['duration_seconds'],
+            isA<int>().having((value) => value > 0, 'positive', true));
       }
     }
   });

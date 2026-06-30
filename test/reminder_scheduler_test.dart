@@ -45,7 +45,8 @@ void main() {
       jobProfile: 'office_computer',
     );
 
-    expect(matching.map((reminder) => reminder.id), ['general-one', 'office-one']);
+    expect(
+        matching.map((reminder) => reminder.id), ['general-one', 'office-one']);
   });
 
   test('cycles through matching reminders by index', () {

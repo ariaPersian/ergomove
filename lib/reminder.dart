@@ -46,9 +46,10 @@ class Reminder {
     return Reminder(
       id: json['id'] as String? ?? '',
       category: json['category'] as String? ?? 'general',
-      jobProfiles: (json['job_profiles'] as List<dynamic>? ?? const <dynamic>['general'])
-          .map((value) => value.toString())
-          .toList(growable: false),
+      jobProfiles:
+          (json['job_profiles'] as List<dynamic>? ?? const <dynamic>['general'])
+              .map((value) => value.toString())
+              .toList(growable: false),
       intervalMinutes: json['interval_minutes'] as int? ?? 20,
       durationSeconds: json['duration_seconds'] as int? ?? 30,
       title: json['title'] as String? ?? '',

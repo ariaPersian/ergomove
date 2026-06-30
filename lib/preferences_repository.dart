@@ -15,9 +15,11 @@ class PreferencesRepository {
     final prefs = await SharedPreferences.getInstance();
 
     return UserPreferences(
-      language: _readLanguage(prefs.getString(_languageKey)) ?? defaults.language,
+      language:
+          _readLanguage(prefs.getString(_languageKey)) ?? defaults.language,
       jobProfile: prefs.getString(_jobProfileKey) ?? defaults.jobProfile,
-      interval: _readInterval(prefs.getInt(_intervalSecondsKey)) ?? defaults.interval,
+      interval:
+          _readInterval(prefs.getInt(_intervalSecondsKey)) ?? defaults.interval,
     );
   }
 
