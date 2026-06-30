@@ -1,6 +1,10 @@
 # Visual motion assets
 
-ErgoMove reminder content should eventually use more natural motion guidance than the current placeholder SVG icons.
+ErgoMove reminder content should use natural visual guidance. The current SVG icons are placeholders and should be replaced or complemented with more realistic movement diagrams and short animations.
+
+## Reference direction
+
+The desired style is closer to ergonomic exercise instruction sheets: clear human posture, numbered or focused movements, and visible start/end direction. The reference image supplied by the product owner shows the intended direction: human exercise diagrams for eyes, shoulders, neck, wrists, back, and seated movement.
 
 ## Target formats
 
@@ -13,10 +17,24 @@ Preferred order:
 ## Content rules
 
 - Show one safe movement at a time.
+- Prefer natural human body diagrams over abstract icons.
 - Keep the movement slow and non-medical.
 - Include a short duration label when useful.
 - Avoid claiming treatment, diagnosis, or guaranteed pain relief.
 - Keep each asset matched to a `reminder.id` and `visual_asset` path in the JSON catalog.
+- Use the same asset in the main reminder card and the reminder popup.
+
+## Popup visual rules
+
+The popup should show the same movement visual as the main card. For the production desktop popup, the motion asset should be readable at a small size near the system tray.
+
+Popup visuals must therefore be:
+
+- high contrast;
+- readable at compact dimensions;
+- safe and non-alarming;
+- preferably loopable for 10-20 seconds;
+- usable without audio.
 
 ## First motion set
 
@@ -29,6 +47,29 @@ Start with these reminders:
 - `wrists-hands-reset`
 - `call-center-voice-breath`
 - `control-room-scan-posture`
+
+## Future implementation notes
+
+Candidate package for animated assets:
+
+- `lottie`
+
+Candidate asset locations:
+
+```text
+assets/animations/
+assets/images/
+```
+
+Suggested JSON fields:
+
+```json
+{
+  "visual_type": "lottie",
+  "visual_asset": "assets/animations/neck_shoulders.json",
+  "visual_description": "Gentle neck and shoulder release animation."
+}
+```
 
 ## Validation
 
@@ -47,3 +88,4 @@ Manual checks:
 2. The corner popup shows the same motion asset.
 3. Persian and English reminders remain aligned by `id`.
 4. The app still works when minimized to the tray.
+5. The visual is readable at popup size.
