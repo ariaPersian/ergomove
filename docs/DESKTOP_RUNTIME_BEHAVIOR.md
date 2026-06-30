@@ -13,7 +13,7 @@ flutter test
 flutter run -d windows
 ```
 
-The current implementation has passed analyzer and tests locally on Windows.
+The previous implementation passed analyzer and tests locally on Windows. After each desktop-window change, rerun the validation checklist below.
 
 ## System tray behavior
 
@@ -43,11 +43,11 @@ Dependencies:
 
 ## Reminder popup behavior
 
-Windows native notifications are not the target UX for ErgoMove reminders. The preferred UX is an ErgoMove-owned popup window that appears like a calm desktop reminder.
+Windows native notifications are not the target UX for ErgoMove reminders. The preferred UX is an ErgoMove-owned desktop popup window that appears like a calm reminder near the Windows clock / system tray.
 
 Required behavior:
 
-1. The reminder should appear in a small popup near the Windows clock / system tray by default.
+1. The reminder should appear in a small independent desktop popup near the Windows clock / system tray by default.
 2. The popup position should become user-configurable later, with at least these options:
    - bottom-right
    - bottom-left
@@ -65,17 +65,26 @@ Required behavior:
 
 Current implementation status:
 
-- The current MVP shows an ErgoMove popup overlay inside the Flutter app window.
-- The next implementation step is to move this popup into a dedicated desktop popup window positioned near the system tray.
+- The current implementation creates a dedicated desktop popup window using `desktop_multi_window`.
+- The popup window receives a serialized `Reminder` payload through `lib/reminder_popup_args.dart`.
+- The popup window uses `ReminderPopup` and `ReminderArt`, so it shows the same content and visual as the main reminder card.
+- The popup window is configured with `window_manager` as always-on-top, hidden from the taskbar, fixed size, and aligned to bottom-right.
+- The popup auto-dismisses after 15 seconds or when the user presses its close button.
 
-Candidate implementation direction:
+Implementation files:
 
-- Use a secondary desktop window for reminders.
-- Keep the main app in tray mode.
-- Position the popup window at the selected screen corner.
-- Use the same `ReminderArt` and reminder content model as the main card.
+- `lib/main.dart`
+- `lib/reminder_popup.dart`
+- `lib/reminder_popup_args.dart`
 
-`desktop_multi_window` is the candidate package for creating a separate desktop popup window because it supports Windows, Linux, and macOS and is intended for multiple desktop windows.
+Dependencies:
+
+- `desktop_multi_window`
+- `window_manager`
+
+Native Windows note:
+
+`desktop_multi_window` may require Windows plugin registration for sub-windows. If the popup window opens but plugins are missing inside the popup, update `windows/runner/flutter_window.cpp` according to the `desktop_multi_window` Windows setup notes and rerun validation.
 
 ## Visual motion behavior
 
@@ -118,5 +127,8 @@ Then validate:
 8. Tray left-click restores the main window.
 9. Tray right-click opens the menu.
 10. `Exit` from tray terminates the app.
-11. Reminder popup appears and can be dismissed.
-12. In the future desktop-popup implementation, popup appears near the Windows clock by default.
+11. `Show next` opens a separate popup near the Windows clock / system tray.
+12. When the timer reaches zero, a separate popup appears near the Windows clock / system tray.
+13. The popup shows movement visual, title, body, and safety note.
+14. The popup auto-dismisses after 15 seconds.
+15. The popup close button dismisses it immediately.
