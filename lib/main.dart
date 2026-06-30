@@ -2,13 +2,24 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import 'local_alerts.dart';
 import 'preferences_repository.dart';
 import 'reminder.dart';
 import 'reminder_art.dart';
 import 'reminder_repository.dart';
 import 'user_preferences.dart';
 
-void main() => runApp(const ErgoMoveApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await const LocalAlerts().initialize();
+  } catch (_) {
+    // The app still works with in-app reminders when system alerts are unavailable.
+  }
+
+  runApp(const ErgoMoveApp());
+}
 
 class ErgoMoveApp extends StatelessWidget {
   const ErgoMoveApp({super.key});
@@ -32,10 +43,12 @@ class ReminderHomePage extends StatefulWidget {
     super.key,
     this.repository = const ReminderRepository(),
     this.preferencesRepository = const PreferencesRepository(),
+    this.localAlerts = const LocalAlerts(),
   });
 
   final ReminderRepository repository;
   final PreferencesRepository preferencesRepository;
+  final LocalAlerts localAlerts;
 
   @override
   State<ReminderHomePage> createState() => _ReminderHomePageState();
@@ -153,6 +166,14 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     );
   }
 
+  void _showLocalAlert(Reminder reminder) {
+    try {
+      widget.localAlerts.showReminder(reminder);
+    } catch (_) {
+      // The visual timer card remains the source of truth if a system alert fails.
+    }
+  }
+
   void _toggleTimer() {
     if (_running) {
       _timer?.cancel();
@@ -168,14 +189,22 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   void _tick() {
     if (!mounted) return;
 
+    Reminder? reminderToAlert;
+
     setState(() {
       if (_remaining.inSeconds <= 1) {
-        _activeReminder = _nextReminder();
+        reminderToAlert = _nextReminder();
+        _activeReminder = reminderToAlert;
         _remaining = _interval;
       } else {
         _remaining -= const Duration(seconds: 1);
       }
     });
+
+    final reminder = reminderToAlert;
+    if (reminder != null) {
+      _showLocalAlert(reminder);
+    }
   }
 
   void _resetTimer() {
@@ -187,10 +216,18 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   }
 
   void _showNextReminderNow() {
+    Reminder? nextReminder;
+
     setState(() {
-      _activeReminder = _nextReminder();
+      nextReminder = _nextReminder();
+      _activeReminder = nextReminder;
       _remaining = _interval;
     });
+
+    final reminder = nextReminder;
+    if (reminder != null) {
+      _showLocalAlert(reminder);
+    }
   }
 
   void _changeLanguage(ReminderLanguage? language) {
