@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'preferences_repository.dart';
 import 'reminder.dart';
+import 'reminder_art.dart';
 import 'reminder_repository.dart';
 import 'user_preferences.dart';
 
@@ -375,6 +376,8 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
+                                      ReminderArt(reminder: reminder),
+                                      const SizedBox(height: 16),
                                       Text(
                                         reminder.title,
                                         style: Theme.of(context)
