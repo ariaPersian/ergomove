@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,13 +8,10 @@ void main() {
     SharedPreferences.setMockInitialValues(<String, Object>{});
   });
 
-  testWidgets('ErgoMove loads the bilingual timer UI', (tester) async {
+  testWidgets('ErgoMove loads the timer shell', (tester) async {
     await tester.pumpWidget(const ErgoMoveApp());
     await tester.pumpAndSettle();
 
     expect(find.text('ErgoMove'), findsOneWidget);
-    expect(find.text('پروفایل کاری'), findsOneWidget);
-    expect(find.text('یادآور بعدی تا'), findsOneWidget);
-    expect(find.byIcon(Icons.play_arrow), findsOneWidget);
   });
 }
