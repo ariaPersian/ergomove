@@ -48,6 +48,8 @@ class ReminderPopupArgs {
         'title': reminder.title,
         'body': reminder.body,
         'safety_note': reminder.safetyNote,
+        'instruction_steps': reminder.instructionSteps,
+        'dose_label': reminder.doseLabel,
         'visual_asset': reminder.visualAsset,
         'visual_type': reminder.visualType,
         'visual_description': reminder.visualDescription,

@@ -8,12 +8,13 @@ import 'desktop_shell_controller.dart';
 import 'preferences_repository.dart';
 import 'reminder.dart';
 import 'reminder_art.dart';
+import 'reminder_guidance.dart';
 import 'reminder_popup.dart';
 import 'reminder_popup_args.dart';
 import 'reminder_repository.dart';
 import 'user_preferences.dart';
 
-const _popupWindowSize = Size(420, 440);
+const _popupWindowSize = Size(460, 640);
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,7 +84,13 @@ class _ReminderPopupWindowAppState extends State<ReminderPopupWindowApp> {
   @override
   void initState() {
     super.initState();
-    _dismissTimer = Timer(const Duration(seconds: 15), _closeWindow);
+    final reminderSeconds = widget.reminder.durationSeconds;
+    final visibleSeconds = reminderSeconds < 20
+        ? 20
+        : reminderSeconds > 60
+            ? 60
+            : reminderSeconds;
+    _dismissTimer = Timer(Duration(seconds: visibleSeconds), _closeWindow);
   }
 
   @override
@@ -536,18 +543,9 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                                             .headlineSmall,
                                       ),
                                       const SizedBox(height: 12),
-                                      Text(
-                                        reminder.body,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge,
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Text(
-                                        reminder.safetyNote,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
+                                      ReminderGuidance(
+                                        reminder: reminder,
+                                        language: _language,
                                       ),
                                     ],
                                   ),

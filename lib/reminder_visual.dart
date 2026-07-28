@@ -7,22 +7,25 @@ class ReminderVisual extends StatelessWidget {
   const ReminderVisual({
     super.key,
     required this.reminder,
+    this.height = 180,
   });
 
   final Reminder reminder;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     final visualAsset = reminder.visualAsset;
+    final isSvg = visualAsset?.toLowerCase().endsWith('.svg') ?? false;
 
     return Semantics(
       label: reminder.visualDescription ?? reminder.title,
       image: true,
       child: Container(
-        height: 180,
+        height: height,
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          color: const Color(0xFFFFF7EF),
           borderRadius: BorderRadius.circular(24),
         ),
         clipBehavior: Clip.antiAlias,
@@ -32,11 +35,25 @@ class ReminderVisual extends StatelessWidget {
                 size: 96,
                 color: Theme.of(context).colorScheme.primary,
               )
-            : SvgPicture.asset(
-                visualAsset,
-                fit: BoxFit.contain,
-              ),
+            : _assetImage(visualAsset, isSvg),
       ),
+    );
+  }
+
+  Widget _assetImage(String asset, bool isSvg) {
+    if (isSvg) {
+      return SvgPicture.asset(
+        asset,
+        fit: BoxFit.contain,
+        excludeFromSemantics: true,
+      );
+    }
+
+    return Image.asset(
+      asset,
+      fit: BoxFit.contain,
+      filterQuality: FilterQuality.high,
+      excludeFromSemantics: true,
     );
   }
 }

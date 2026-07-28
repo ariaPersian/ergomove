@@ -57,6 +57,8 @@ Required behavior:
    - movement image or animation
    - reminder title
    - reminder body
+   - dose / repetition label
+   - numbered instruction steps
    - safety note
    - dismiss control
 4. The popup should auto-dismiss after a short duration unless the user closes it earlier.
@@ -68,9 +70,12 @@ Current implementation status:
 - The current implementation creates a dedicated desktop popup window using `desktop_multi_window`.
 - The popup window receives a serialized `Reminder` payload through `lib/reminder_popup_args.dart`.
 - The popup payload carries the selected language so Persian content uses RTL layout and localized controls.
-- The popup window uses `ReminderPopup` and `ReminderArt`, so it shows the same content and visual as the main reminder card.
+- The popup window uses `ReminderPopup`, `ReminderArt`, and
+  `ReminderGuidance`, so it shows the same visual, dose, steps, and safety note
+  as the main reminder card.
 - The popup window is configured with `window_manager` as always-on-top, hidden from the taskbar, fixed size, and aligned to bottom-right.
-- The popup auto-dismisses after 15 seconds or when the user presses its close button.
+- The popup auto-dismisses after the reminder duration, clamped to 20–60
+  seconds, or when the user presses its close button.
 - The Windows runner registers generated plugins for every secondary Flutter engine created by `desktop_multi_window`.
 
 Implementation files:
@@ -134,7 +139,9 @@ Then validate:
 10. `Exit` from tray terminates the app.
 11. `Show next` opens a separate popup near the Windows clock / system tray.
 12. When the timer reaches zero, a separate popup appears near the Windows clock / system tray.
-13. The popup shows movement visual, title, body, and safety note.
-14. The popup auto-dismisses after 15 seconds.
+13. The popup shows movement visual, title, body, dose, numbered steps, and
+    safety note.
+14. The popup auto-dismisses after the reminder duration, clamped to 20–60
+    seconds.
 15. The popup close button dismisses it immediately.
 16. Persian popup content is RTL and its close tooltip is localized.
