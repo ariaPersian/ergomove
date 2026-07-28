@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -11,9 +11,9 @@
       "title": "Eye break",
       "body": "Look away from the screen and focus on a distant object for 20 seconds. Blink slowly and let your eyes relax.",
       "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/eye_break.svg",
-      "visual_description": "Illustration of a screen and relaxed eyes for the 20-second eye break."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/eye_break_v2.webp",
+      "visual_description": "A worker looks away from the nearby monitor toward a distant outdoor point."
     },
     {
       "id": "posture-neutral-sitting",
@@ -24,9 +24,9 @@
       "title": "Posture reset",
       "body": "Relax your shoulders. Keep your head level, wrists straight, elbows close, and both feet fully supported.",
       "safety_note": "Do not force a position that causes pain. Adjust workstation equipment where possible.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/posture_reset.svg",
-      "visual_description": "Illustration of a person sitting with a neutral upright posture."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/posture_reset_v2.webp",
+      "visual_description": "A worker sits with a level head, supported back, straight wrists, and supported feet."
     },
     {
       "id": "movement-stand-walk",
@@ -37,9 +37,9 @@
       "title": "Move for a minute",
       "body": "Stand up, walk gently, and loosen your hips and back before returning to work.",
       "safety_note": "Move within your safe range and workplace rules.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/movement_walk.svg",
-      "visual_description": "Illustration of gentle walking for a short movement break."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/movement_walk_v2.webp",
+      "visual_description": "A worker walks gently away from the workstation for a short movement break."
     },
     {
       "id": "neck-shoulder-release",
@@ -50,9 +50,9 @@
       "title": "Neck and shoulder release",
       "body": "Let your arms rest at your sides. Gently roll your shoulders back, then bring your head back to a comfortable neutral position.",
       "safety_note": "Keep the movement gentle. Stop if you feel dizziness, tingling, sharp pain, or worsening symptoms.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/neck_shoulders.svg",
-      "visual_description": "Illustration of gentle shoulder release and neutral neck posture."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/neck_shoulders_v2.webp",
+      "visual_description": "A worker keeps the head neutral while gently rolling relaxed shoulders backward."
     },
     {
       "id": "wrists-hands-reset",
@@ -63,9 +63,9 @@
       "title": "Hands and wrists reset",
       "body": "Take your hands off the keyboard or mouse. Open and close your hands slowly, then return with wrists straight and relaxed.",
       "safety_note": "Avoid forceful stretching. Persistent numbness, weakness, or pain should be checked by a qualified clinician.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/wrists_hands.svg",
-      "visual_description": "Illustration of open hands for a wrist and hand reset."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/wrists_hands_v2.webp",
+      "visual_description": "A worker lifts both hands from the keyboard and gently opens the fingers with straight wrists."
     },
     {
       "id": "call-center-voice-breath",
@@ -76,9 +76,9 @@
       "title": "Voice and breathing reset",
       "body": "Pause between calls when possible. Relax your jaw, lower your shoulders, and take two slow nasal breaths before the next task.",
       "safety_note": "This is a general comfort prompt. Follow your workplace procedures and seek professional care for persistent voice or breathing symptoms.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/breathing.svg",
-      "visual_description": "Illustration of calm breathing for a short reset."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/breathing_v2.webp",
+      "visual_description": "A call-center worker relaxes the jaw and shoulders while taking a slow nasal breath."
     },
     {
       "id": "control-room-scan-posture",
@@ -89,9 +89,9 @@
       "title": "Control-room posture scan",
       "body": "Before the next monitoring cycle, check that your screens are easy to view, your shoulders are relaxed, and your feet are supported.",
       "safety_note": "Do not interrupt safety-critical monitoring. Use this prompt only when operationally safe.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/control_room.svg",
-      "visual_description": "Illustration of screen monitoring with neutral posture."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/control_room_v2.webp",
+      "visual_description": "A control-room operator maintains neutral posture while continuing to monitor three screens."
     },
     {
       "id": "driver-parking-mobility",
@@ -102,9 +102,9 @@
       "title": "Parked mobility break",
       "body": "When parked safely, step out if permitted, walk briefly, and move your ankles, hips, and shoulders before driving again.",
       "safety_note": "Never do this while driving. Follow road, site, and employer safety rules.",
-      "visual_type": "static_svg",
-      "visual_asset": "assets/images/parked_mobility.svg",
-      "visual_description": "Illustration of a safe stopped mobility break."
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/parked_mobility_v2.webp",
+      "visual_description": "A driver walks gently beside a vehicle that is safely parked in a marked space."
     }
   ]
 }

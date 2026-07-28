@@ -38,6 +38,10 @@ Latest desktop popup work:
 - The popup auto-dismisses after 15 seconds or when dismissed manually.
 - Generated plugins are registered for secondary Flutter engines on Windows.
 - Persian popup content uses RTL layout and localized controls.
+- The reminder catalog now uses a consistent set of semi-realistic WebP
+  movement illustrations for all eight current reminders.
+- English and Persian catalogs share each visual while keeping localized
+  accessibility descriptions.
 
 CI runs analyzer checks, tests, and a full Windows release build. Native popup and
 tray behavior still require the manual desktop checklist after each windowing

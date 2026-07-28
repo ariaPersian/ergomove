@@ -1,6 +1,35 @@
 # Visual motion assets
 
-ErgoMove reminder content should use natural visual guidance. The current SVG icons are placeholders and should be replaced or complemented with more realistic movement diagrams and short animations.
+ErgoMove reminder content should use natural visual guidance. The original SVG
+icons remain as lightweight legacy fallbacks, while the active catalog uses a
+consistent set of AI-assisted, semi-realistic WebP movement illustrations.
+
+## Current v2 visual system
+
+The first realistic set covers every current reminder:
+
+- `eye-20-20-20`
+- `posture-neutral-sitting`
+- `movement-stand-walk`
+- `neck-shoulder-release`
+- `wrists-hands-reset`
+- `call-center-voice-breath`
+- `control-room-scan-posture`
+- `driver-parking-mobility`
+
+All eight assets:
+
+- use the same worker, clothing, palette, lighting, and warm neutral background;
+- avoid embedded words so one image works in both English and Persian;
+- use simple directional marks only where they clarify the action;
+- are stored at 960 x 640 as compressed static WebP files;
+- retain localized semantic descriptions in both content catalogs;
+- are non-destructive `v2` additions, so the earlier SVG files remain available.
+
+The source generation prompts use a `scientific-educational` direction with
+realistic anatomy, gentle movement, no medical claim, no logo, and no watermark.
+AI output is treated as an illustration draft and is checked at compact popup
+size before use.
 
 ## Reference direction
 
@@ -12,7 +41,11 @@ Preferred order:
 
 1. Lottie JSON for short looping motion guidance.
 2. Animated WebP or GIF when Lottie production is not available.
-3. Static SVG or PNG as a fallback.
+3. Static WebP, SVG, or PNG as a fallback.
+
+For future animation, prefer authored vector or skeletal motion over
+independently generated AI frames. Authored motion keeps anatomy, timing, and
+movement direction stable across the loop.
 
 ## Content rules
 
@@ -36,17 +69,16 @@ Popup visuals must therefore be:
 - preferably loopable for 10-20 seconds;
 - usable without audio.
 
-## First motion set
+## Asset paths
 
-Start with these reminders:
+The v2 set lives in:
 
-- `eye-20-20-20`
-- `posture-neutral-sitting`
-- `movement-stand-walk`
-- `neck-shoulder-release`
-- `wrists-hands-reset`
-- `call-center-voice-breath`
-- `control-room-scan-posture`
+```text
+assets/images/realistic/
+```
+
+Both localized catalogs must point to the same asset for the same reminder ID,
+while providing their own localized `visual_description`.
 
 ## Future implementation notes
 
