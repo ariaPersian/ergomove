@@ -4,14 +4,49 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  flutter-analyze:
+  windows-validation:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
+          cache: true
+      - name: Show Flutter version
+        run: flutter --version
+      - name: Resolve dependencies
+        run: flutter pub get
+      - name: Analyze
+        run: flutter analyze
+      - name: Test
+        run: flutter test
+      - name: Build Windows release
+        run: flutter build windows --release
+      - name: Capture resolved dependency state
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-dependency-state
+          path: |
+            pubspec.lock
+            windows/flutter/generated_plugin_registrant.cc
+            windows/flutter/generated_plugin_registrant.h
+            windows/flutter/generated_plugins.cmake
+          if-no-files-found: error
+          retention-days: 3
+      - name: Upload Windows release
+        uses: actions/upload-artifact@v4
+        with:
+          name: ergomove-windows-release
+          path: build/windows/*/runner/Release/
+          if-no-files-found: error
+          retention-days: 7

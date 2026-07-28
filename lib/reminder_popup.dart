@@ -7,15 +7,18 @@ class ReminderPopup extends StatelessWidget {
   const ReminderPopup({
     super.key,
     required this.reminder,
+    required this.language,
     required this.onDismiss,
   });
 
   final Reminder reminder;
+  final ReminderLanguage language;
   final VoidCallback onDismiss;
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final isRtl = language.isRtl;
 
     return Material(
       elevation: 12,
@@ -33,12 +36,12 @@ class ReminderPopup extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      'ErgoMove reminder',
+                      isRtl ? 'یادآور ارگوموو' : 'ErgoMove reminder',
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ),
                   IconButton(
-                    tooltip: 'Dismiss',
+                    tooltip: isRtl ? 'بستن' : 'Dismiss',
                     onPressed: onDismiss,
                     icon: const Icon(Icons.close),
                   ),

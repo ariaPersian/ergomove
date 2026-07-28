@@ -24,7 +24,12 @@ Future<void> main(List<String> args) async {
   if (ReminderPopupArgs.isPopup(windowArgs)) {
     await _configureReminderPopupWindow();
     final popupArgs = ReminderPopupArgs.decode(windowArgs);
-    runApp(ReminderPopupWindowApp(reminder: popupArgs.reminder));
+    runApp(
+      ReminderPopupWindowApp(
+        reminder: popupArgs.reminder,
+        language: popupArgs.language,
+      ),
+    );
     return;
   }
 
@@ -62,9 +67,11 @@ class ReminderPopupWindowApp extends StatefulWidget {
   const ReminderPopupWindowApp({
     super.key,
     required this.reminder,
+    required this.language,
   });
 
   final Reminder reminder;
+  final ReminderLanguage language;
 
   @override
   State<ReminderPopupWindowApp> createState() => _ReminderPopupWindowAppState();
@@ -91,21 +98,28 @@ class _ReminderPopupWindowAppState extends State<ReminderPopupWindowApp> {
 
   @override
   Widget build(BuildContext context) {
+    final isRtl = widget.language.isRtl;
+    final title = isRtl ? 'یادآور ارگوموو' : 'ErgoMove reminder';
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ErgoMove reminder',
+      title: title,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.teal,
       ),
-      home: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: ReminderPopup(
-              reminder: widget.reminder,
-              onDismiss: _closeWindow,
+      home: Directionality(
+        textDirection: isRtl ? TextDirection.rtl : TextDirection.ltr,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: ReminderPopup(
+                reminder: widget.reminder,
+                language: widget.language,
+                onDismiss: _closeWindow,
+              ),
             ),
           ),
         ),
@@ -261,7 +275,10 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     try {
       final popupWindow = await WindowController.create(
         WindowConfiguration(
-          arguments: ReminderPopupArgs(reminder).encode(),
+          arguments: ReminderPopupArgs(
+            reminder: reminder,
+            language: _language,
+          ).encode(),
           hiddenAtLaunch: true,
         ),
       );
