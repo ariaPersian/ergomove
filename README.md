@@ -33,11 +33,15 @@ Validated features before the latest desktop popup change:
 Latest desktop popup work:
 
 - Reminder popup was moved from an overlay inside the main Flutter view to a dedicated desktop popup view.
-- The popup receives a serialized reminder payload through `lib/reminder_popup_args.dart`.
+- The popup receives a serialized reminder and language payload through `lib/reminder_popup_args.dart`.
 - The popup is configured as always-on-top, fixed-size, hidden from taskbar, and bottom-right aligned near the Windows clock / system tray.
 - The popup auto-dismisses after 15 seconds or when dismissed manually.
+- Generated plugins are registered for secondary Flutter engines on Windows.
+- Persian popup content uses RTL layout and localized controls.
 
-After pulling the latest changes, rerun validation because a new desktop popup dependency was added.
+CI runs analyzer checks, tests, and a full Windows release build. Native popup and
+tray behavior still require the manual desktop checklist after each windowing
+change.
 
 ## Desktop behavior
 

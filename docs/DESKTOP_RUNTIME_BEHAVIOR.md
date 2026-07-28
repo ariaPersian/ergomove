@@ -67,9 +67,11 @@ Current implementation status:
 
 - The current implementation creates a dedicated desktop popup window using `desktop_multi_window`.
 - The popup window receives a serialized `Reminder` payload through `lib/reminder_popup_args.dart`.
+- The popup payload carries the selected language so Persian content uses RTL layout and localized controls.
 - The popup window uses `ReminderPopup` and `ReminderArt`, so it shows the same content and visual as the main reminder card.
 - The popup window is configured with `window_manager` as always-on-top, hidden from the taskbar, fixed size, and aligned to bottom-right.
 - The popup auto-dismisses after 15 seconds or when the user presses its close button.
+- The Windows runner registers generated plugins for every secondary Flutter engine created by `desktop_multi_window`.
 
 Implementation files:
 
@@ -82,9 +84,12 @@ Dependencies:
 - `desktop_multi_window`
 - `window_manager`
 
-Native Windows note:
+Native Windows requirement:
 
-`desktop_multi_window` may require Windows plugin registration for sub-windows. If the popup window opens but plugins are missing inside the popup, update `windows/runner/flutter_window.cpp` according to the `desktop_multi_window` Windows setup notes and rerun validation.
+Each popup owns a separate Flutter engine. Keep the
+`DesktopMultiWindowSetWindowCreatedCallback` registration in
+`windows/runner/flutter_window.cpp`; without it, plugins such as
+`window_manager` are unavailable inside popup windows.
 
 ## Visual motion behavior
 
@@ -132,3 +137,4 @@ Then validate:
 13. The popup shows movement visual, title, body, and safety note.
 14. The popup auto-dismisses after 15 seconds.
 15. The popup close button dismisses it immediately.
+16. Persian popup content is RTL and its close tooltip is localized.
