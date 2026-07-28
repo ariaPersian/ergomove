@@ -35,11 +35,12 @@ Latest desktop popup work:
 - Reminder popup was moved from an overlay inside the main Flutter view to a dedicated desktop popup view.
 - The popup receives a serialized reminder and language payload through `lib/reminder_popup_args.dart`.
 - The popup is configured as always-on-top, fixed-size, hidden from taskbar, and bottom-right aligned near the Windows clock / system tray.
-- The popup auto-dismisses after 15 seconds or when dismissed manually.
+- The popup stays visible for the reminder duration, clamped to 20–60 seconds,
+  or closes immediately when dismissed manually.
 - Generated plugins are registered for secondary Flutter engines on Windows.
 - Persian popup content uses RTL layout and localized controls.
 - The reminder catalog now uses a consistent set of semi-realistic WebP
-  movement illustrations for all eight current reminders.
+  movement illustrations for all twelve current reminders.
 - English and Persian catalogs share each visual while keeping localized
   accessibility descriptions.
 
@@ -70,7 +71,8 @@ Windows native notifications are not the final UX target. ErgoMove shows its own
 Current implementation:
 
 - The app creates a dedicated reminder popup view using `desktop_multi_window`.
-- The popup uses the same `ReminderPopup` and `ReminderArt` widgets as the in-app reminder content.
+- The popup uses the same visual and structured guidance as the in-app reminder
+  card, including dose, numbered steps, and safety note.
 - The default popup position is bottom-right, near the Windows clock / system tray.
 
 Future behavior:

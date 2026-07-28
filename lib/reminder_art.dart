@@ -7,9 +7,11 @@ class ReminderArt extends StatelessWidget {
   const ReminderArt({
     super.key,
     required this.reminder,
+    this.height = 180,
   });
 
   final Reminder reminder;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ReminderArt extends StatelessWidget {
       label: reminder.visualDescription ?? reminder.title,
       image: true,
       child: Container(
-        height: 180,
+        height: height,
         width: double.infinity,
         padding: EdgeInsets.all(isSvg ? 12 : 0),
         decoration: BoxDecoration(

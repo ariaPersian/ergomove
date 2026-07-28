@@ -15,6 +15,11 @@ void main() {
     title: 'رهاسازی گردن و شانه',
     body: 'حرکت را آرام انجام دهید.',
     safetyNote: 'در صورت درد، حرکت را متوقف کنید.',
+    instructionSteps: [
+      'صاف بنشینید.',
+      'شانه‌ها را آرام حرکت دهید.',
+    ],
+    doseLabel: '۵ بار آرام',
     visualAsset: 'assets/images/neck_shoulders.svg',
     visualType: 'static_svg',
     visualDescription: 'حرکت آرام گردن و شانه',
@@ -36,6 +41,8 @@ void main() {
     expect(decoded.reminder.title, reminder.title);
     expect(decoded.reminder.body, reminder.body);
     expect(decoded.reminder.safetyNote, reminder.safetyNote);
+    expect(decoded.reminder.instructionSteps, reminder.instructionSteps);
+    expect(decoded.reminder.doseLabel, reminder.doseLabel);
     expect(decoded.reminder.visualAsset, reminder.visualAsset);
     expect(decoded.reminder.visualType, reminder.visualType);
     expect(

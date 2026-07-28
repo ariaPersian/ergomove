@@ -25,6 +25,8 @@ class Reminder {
     required this.title,
     required this.body,
     required this.safetyNote,
+    this.instructionSteps = const <String>[],
+    this.doseLabel,
     this.visualAsset,
     this.visualType = 'static_svg',
     this.visualDescription,
@@ -38,6 +40,8 @@ class Reminder {
   final String title;
   final String body;
   final String safetyNote;
+  final List<String> instructionSteps;
+  final String? doseLabel;
   final String? visualAsset;
   final String visualType;
   final String? visualDescription;
@@ -55,6 +59,11 @@ class Reminder {
       title: json['title'] as String? ?? '',
       body: json['body'] as String? ?? '',
       safetyNote: json['safety_note'] as String? ?? '',
+      instructionSteps:
+          (json['instruction_steps'] as List<dynamic>? ?? const <dynamic>[])
+              .map((value) => value.toString())
+              .toList(growable: false),
+      doseLabel: json['dose_label'] as String?,
       visualAsset: json['visual_asset'] as String?,
       visualType: json['visual_type'] as String? ?? 'static_svg',
       visualDescription: json['visual_description'] as String?,

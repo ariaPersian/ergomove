@@ -7,9 +7,11 @@ class ReminderVisual extends StatelessWidget {
   const ReminderVisual({
     super.key,
     required this.reminder,
+    this.height = 180,
   });
 
   final Reminder reminder;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ReminderVisual extends StatelessWidget {
       label: reminder.visualDescription ?? reminder.title,
       image: true,
       child: Container(
-        height: 180,
+        height: height,
         width: double.infinity,
         decoration: BoxDecoration(
           color: const Color(0xFFFFF7EF),

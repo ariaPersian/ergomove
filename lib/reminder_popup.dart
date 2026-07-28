@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'reminder.dart';
 import 'reminder_art.dart';
+import 'reminder_guidance.dart';
 
 class ReminderPopup extends StatelessWidget {
   const ReminderPopup({
@@ -28,40 +29,41 @@ class ReminderPopup extends StatelessWidget {
         constraints: const BoxConstraints(maxWidth: 380),
         child: Padding(
           padding: const EdgeInsets.all(18),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      isRtl ? 'یادآور ارگوموو' : 'ErgoMove reminder',
-                      style: Theme.of(context).textTheme.labelLarge,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        isRtl ? 'یادآور ارگوموو' : 'ErgoMove reminder',
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    tooltip: isRtl ? 'بستن' : 'Dismiss',
-                    onPressed: onDismiss,
-                    icon: const Icon(Icons.close),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              ReminderArt(reminder: reminder),
-              const SizedBox(height: 16),
-              Text(
-                reminder.title,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(reminder.body),
-              const SizedBox(height: 10),
-              Text(
-                reminder.safetyNote,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ],
+                    IconButton(
+                      tooltip: isRtl ? 'بستن' : 'Dismiss',
+                      onPressed: onDismiss,
+                      icon: const Icon(Icons.close),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ReminderArt(reminder: reminder, height: 150),
+                const SizedBox(height: 16),
+                Text(
+                  reminder.title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                ReminderGuidance(
+                  reminder: reminder,
+                  language: language,
+                  compact: true,
+                ),
+              ],
+            ),
           ),
         ),
       ),

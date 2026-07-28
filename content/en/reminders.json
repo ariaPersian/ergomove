@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -10,6 +10,11 @@
       "duration_seconds": 20,
       "title": "Eye break",
       "body": "Look away from the screen and focus on a distant object for 20 seconds. Blink slowly and let your eyes relax.",
+      "dose_label": "20 seconds • every 20 minutes",
+      "instruction_steps": [
+        "Turn your gaze from the screen to something about 6 m (20 ft) away.",
+        "Keep looking for 20 seconds and blink normally before returning."
+      ],
       "safety_note": "This is general visual hygiene guidance, not medical advice. Persistent eye symptoms should be assessed by an eye-care professional.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/eye_break_v2.webp",
@@ -23,6 +28,12 @@
       "duration_seconds": 30,
       "title": "Posture reset",
       "body": "Relax your shoulders. Keep your head level, wrists straight, elbows close, and both feet fully supported.",
+      "dose_label": "30-second check",
+      "instruction_steps": [
+        "Support both feet on the floor or a footrest.",
+        "Let your shoulders drop and keep your head level.",
+        "Bring your elbows close and return with straight, relaxed wrists."
+      ],
       "safety_note": "Do not force a position that causes pain. Adjust workstation equipment where possible.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/posture_reset_v2.webp",
@@ -36,6 +47,12 @@
       "duration_seconds": 60,
       "title": "Move for a minute",
       "body": "Stand up, walk gently, and loosen your hips and back before returning to work.",
+      "dose_label": "1 minute",
+      "instruction_steps": [
+        "Stand only when the area and current task are safe.",
+        "Walk at an easy pace and let your arms move naturally.",
+        "Return to work in a comfortable, supported position."
+      ],
       "safety_note": "Move within your safe range and workplace rules.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/movement_walk_v2.webp",
@@ -49,6 +66,12 @@
       "duration_seconds": 30,
       "title": "Neck and shoulder release",
       "body": "Let your arms rest at your sides. Gently roll your shoulders back, then bring your head back to a comfortable neutral position.",
+      "dose_label": "5 slow circles back • 5 forward",
+      "instruction_steps": [
+        "Sit or stand tall with your head facing forward.",
+        "Roll both shoulders slowly backward five times.",
+        "Repeat forward, then let your shoulders settle."
+      ],
       "safety_note": "Keep the movement gentle. Stop if you feel dizziness, tingling, sharp pain, or worsening symptoms.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/neck_shoulders_v2.webp",
@@ -62,6 +85,12 @@
       "duration_seconds": 30,
       "title": "Hands and wrists reset",
       "body": "Take your hands off the keyboard or mouse. Open and close your hands slowly, then return with wrists straight and relaxed.",
+      "dose_label": "3 slow cycles",
+      "instruction_steps": [
+        "Lift both hands away from the keyboard or mouse.",
+        "Open the fingers, then make a loose fist with each thumb outside.",
+        "Open again without forcing the fingers and repeat slowly."
+      ],
       "safety_note": "Avoid forceful stretching. Persistent numbness, weakness, or pain should be checked by a qualified clinician.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/wrists_hands_v2.webp",
@@ -75,6 +104,12 @@
       "duration_seconds": 30,
       "title": "Voice and breathing reset",
       "body": "Pause between calls when possible. Relax your jaw, lower your shoulders, and take two slow nasal breaths before the next task.",
+      "dose_label": "2 slow breaths",
+      "instruction_steps": [
+        "Pause only when there is no active call or urgent task.",
+        "Unclench your jaw and let your shoulders lower.",
+        "Take two comfortable breaths through your nose."
+      ],
       "safety_note": "This is a general comfort prompt. Follow your workplace procedures and seek professional care for persistent voice or breathing symptoms.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/breathing_v2.webp",
@@ -88,6 +123,12 @@
       "duration_seconds": 30,
       "title": "Control-room posture scan",
       "body": "Before the next monitoring cycle, check that your screens are easy to view, your shoulders are relaxed, and your feet are supported.",
+      "dose_label": "30-second check",
+      "instruction_steps": [
+        "Keep all safety-critical displays in view.",
+        "Check that your head faces forward and your shoulders are relaxed.",
+        "Support both feet and bring frequently used controls within easy reach."
+      ],
       "safety_note": "Do not interrupt safety-critical monitoring. Use this prompt only when operationally safe.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/control_room_v2.webp",
@@ -101,10 +142,92 @@
       "duration_seconds": 60,
       "title": "Parked mobility break",
       "body": "When parked safely, step out if permitted, walk briefly, and move your ankles, hips, and shoulders before driving again.",
+      "dose_label": "1 minute • safely parked only",
+      "instruction_steps": [
+        "Park securely in a permitted place and finish the driving task.",
+        "Step out only when site and traffic conditions are safe.",
+        "Walk gently, then settle into a comfortable position before restarting."
+      ],
       "safety_note": "Never do this while driving. Follow road, site, and employer safety rules.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/parked_mobility_v2.webp",
       "visual_description": "A driver walks gently beside a vehicle that is safely parked in a marked space."
+    },
+    {
+      "id": "shoulder-shrug-release",
+      "category": "neck_shoulders",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 60,
+      "duration_seconds": 20,
+      "title": "Shoulder shrug and release",
+      "body": "Gently raise both shoulders, pause briefly, then let them relax to interrupt a fixed shoulder position.",
+      "dose_label": "Hold 3–5 seconds • repeat 2–3 times",
+      "instruction_steps": [
+        "Sit or stand tall with your arms loose and head level.",
+        "Raise both shoulders toward your ears only to slight tension.",
+        "Hold briefly, then release fully and repeat."
+      ],
+      "safety_note": "Use no weights and do not force the lift. Stop for pain, tingling, numbness, or dizziness.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/shoulder_shrug_v3.webp",
+      "visual_description": "Two front-facing poses show relaxed shoulders followed by a gentle shoulder shrug, with arrows indicating lift and release."
+    },
+    {
+      "id": "overhead-reach",
+      "category": "upper_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 90,
+      "duration_seconds": 40,
+      "title": "Gentle overhead reach",
+      "body": "Reach upward through a comfortable range to change your upper-body position after desk work.",
+      "dose_label": "Hold 10–20 seconds • 2 rounds",
+      "instruction_steps": [
+        "Stand steadily with feet hip-width apart and knees soft.",
+        "Loosely interlace your fingers and reach upward without arching your back.",
+        "Breathe normally, lower your arms slowly, and repeat once."
+      ],
+      "safety_note": "Keep the range comfortable and joints unlocked. Skip this movement if overhead reach is restricted or painful.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/overhead_reach_v3.webp",
+      "visual_description": "A standing start pose transitions to a comfortable two-arm overhead reach with an upward arrow."
+    },
+    {
+      "id": "seated-side-reach",
+      "category": "upper_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 90,
+      "duration_seconds": 30,
+      "title": "Seated side reach",
+      "body": "Use a small side reach to change position while keeping your seat and feet supported.",
+      "dose_label": "Hold 10 seconds • each side",
+      "instruction_steps": [
+        "Use a stable chair without wheels and place both feet flat.",
+        "Raise one arm and lean a small amount to the opposite side.",
+        "Keep both sitting bones down, return slowly, and change sides."
+      ],
+      "safety_note": "Do not pull on the chair or bend deeply. Skip this seated version if the chair can roll or the movement causes pain.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/seated_side_reach_v3.webp",
+      "visual_description": "Two seated poses show an upright start and a small one-arm side reach on a stable four-leg chair."
+    },
+    {
+      "id": "seated-torso-turn",
+      "category": "upper_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 90,
+      "duration_seconds": 50,
+      "title": "Gentle seated turn",
+      "body": "Turn your upper body within a comfortable range while keeping your hips and feet facing forward.",
+      "dose_label": "Hold 5 seconds • 5 each side",
+      "instruction_steps": [
+        "Sit upright on a stable chair with both feet flat.",
+        "Keep your hips forward and make a small upper-body turn.",
+        "Do not pull with your hands; return to center and change sides."
+      ],
+      "safety_note": "Keep the movement slow and comfortable. Stop for pain, dizziness, tingling, or worsening symptoms.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/images/realistic/seated_torso_turn_v3.webp",
+      "visual_description": "Two seated poses show a forward start and a small upper-body turn with hips and feet supported."
     }
   ]
 }

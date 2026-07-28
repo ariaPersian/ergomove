@@ -31,6 +31,25 @@ realistic anatomy, gentle movement, no medical claim, no logo, and no watermark.
 AI output is treated as an illustration draft and is checked at compact popup
 size before use.
 
+## Reference-informed v3 additions
+
+Four new movement cards extend the pack:
+
+- `shoulder-shrug-release`
+- `overhead-reach`
+- `seated-side-reach`
+- `seated-torso-turn`
+
+The product-owner reference sheet and screen recording were used to identify
+the useful instructional pattern: an immediately recognizable start/end pose,
+a minimal directional arrow, a visible dose, and short numbered steps. The
+reference artwork, text, branding, and watermark are not included in ErgoMove.
+The v3 assets are original generations that retain the v2 character and palette.
+
+Instruction text remains outside the image. `dose_label` and
+`instruction_steps` are localized in the content catalogs and rendered below
+the shared artwork in both the main card and the popup.
+
 ## Reference direction
 
 The desired style is closer to ergonomic exercise instruction sheets: clear human posture, numbered or focused movements, and visible start/end direction. The reference image supplied by the product owner shows the intended direction: human exercise diagrams for eyes, shoulders, neck, wrists, back, and seated movement.
@@ -53,6 +72,9 @@ movement direction stable across the loop.
 - Prefer natural human body diagrams over abstract icons.
 - Keep the movement slow and non-medical.
 - Include a short duration label when useful.
+- Prefer a clear start/end pair for movement instructions.
+- Keep numbers, durations, and explanatory text in the localized UI rather than
+  baking them into the image.
 - Avoid claiming treatment, diagnosis, or guaranteed pain relief.
 - Keep each asset matched to a `reminder.id` and `visual_asset` path in the JSON catalog.
 - Use the same asset in the main reminder card and the reminder popup.

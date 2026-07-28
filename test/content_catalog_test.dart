@@ -42,6 +42,14 @@ void main() {
             isA<String>()
                 .having((value) => value.isNotEmpty, 'not empty', true));
         expect(
+            item['dose_label'],
+            isA<String>()
+                .having((value) => value.isNotEmpty, 'not empty', true));
+        expect(
+            item['instruction_steps'],
+            isA<List<dynamic>>()
+                .having((value) => value.length >= 2, 'at least 2 steps', true));
+        expect(
             item['job_profiles'],
             isA<List<dynamic>>()
                 .having((value) => value.isNotEmpty, 'not empty', true));

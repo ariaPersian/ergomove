@@ -21,6 +21,18 @@ Primary references used for the v2 visual review:
 The references guide posture and safety checks; generated artwork does not copy
 source illustrations.
 
+Additional references used for the structured v3 movement cards:
+
+- [CCOHS: Office Ergonomics — Stretching at the Workstation](https://www.ccohs.ca/oshanswers/ergonomics/office/stretching.html)
+- [NHS: Sitting exercises](https://www.nhs.uk/live-well/exercise/sitting-exercises/)
+- [OSHA: Computer Workstations — Additional Information](https://www.osha.gov/etools/computer-workstations/additional-information)
+- [American Optometric Association: Computer vision syndrome](https://www.aoa.org/healthy-eyes/eye-and-vision-conditions/computer-vision-syndrome)
+
+These sources support gentle ranges, normal breathing, stable seating, neutral
+workstation posture, regular changes of position, and the displayed
+hold/repetition ranges. The content remains general guidance and should receive
+occupational-health review before commercial release.
+
 ## Product implications
 
 - Use reminders as nudges, not as medical prescriptions.
@@ -47,5 +59,7 @@ source illustrations.
 1. Draft reminder in English.
 2. Translate to Persian.
 3. Add category, job profiles, duration, safety note.
-4. Review by ergonomics/physio/occupational-health expert before commercial release.
-5. Version content packs.
+4. Add localized dose and numbered instruction steps.
+5. Review the generated visual at compact popup size.
+6. Review by ergonomics/physio/occupational-health expert before commercial release.
+7. Version content packs.
