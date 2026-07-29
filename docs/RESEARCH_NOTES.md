@@ -33,6 +33,24 @@ workstation posture, regular changes of position, and the displayed
 hold/repetition ranges. The content remains general guidance and should receive
 occupational-health review before commercial release.
 
+Additional references used for the animated v4 workplace movements:
+
+- [CCOHS: Office Ergonomics — Stretching at the Workstation](https://www.ccohs.ca/oshanswers/ergonomics/office/stretching.html)
+- [NHS: Sitting exercises](https://www.nhs.uk/live-well/exercise/sitting-exercises/)
+- [NHS: Strength exercises](https://www.nhs.uk/live-well/exercise/strength-exercises/)
+- [OSHA: Computer Workstations — Work Process and Recognition](https://www.osha.gov/etools/computer-workstations/work-process)
+- [HSE: DSE work routine and breaks](https://www.hse.gov.uk/msd/dse/work-routine.htm)
+
+The product-owner image archive was reviewed as an idea set. It suggested
+lower-body mobility, chest opening, supported standing movement, and hand/wrist
+posture. No supplied poster, wording, branding, or watermark is shipped.
+
+The v4 shortlist adds seated chest opening, seated ankle flex/point,
+sit-to-stand, and supported calf raises. Median-nerve glides, deep forward
+folds, floor cat-cow, deep lunges, and unsupported single-leg stretches were
+not selected for the general workplace pack because they are more clinical,
+space-dependent, or balance-sensitive.
+
 ## Product implications
 
 - Use reminders as nudges, not as medical prescriptions.
@@ -46,6 +64,11 @@ occupational-health review before commercial release.
   remain under app control.
 - Review AI-assisted human anatomy, motion direction, and compact-size
   readability before release.
+- Use a stable chair without wheels for chair-supported movement.
+- Provide equivalent female and male guides without changing dose or safety
+  instructions.
+- Respect the platform reduced-motion preference by showing a still start/peak
+  pair instead of looping motion.
 
 ## Candidate reminder intervals
 

@@ -26,5 +26,6 @@ flutter:
   assets:
     - content/en/reminders.json
     - content/fa/reminders.json
+    - assets/animations/
     - assets/images/
     - assets/images/realistic/

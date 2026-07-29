@@ -25,7 +25,7 @@ Validated features before the latest desktop popup change:
 - Job profile filtering for office/computer, call center, control room, and driver roles.
 - Configurable reminder intervals with a 30-second demo option.
 - Start, pause, reset, and show-next controls.
-- Persistent language/profile/interval preferences.
+- Persistent language/profile/interval and woman/man guide preferences.
 - Reminder SVG visuals shown in the main reminder card.
 - Windows system tray behavior: close/minimize hides the app to tray; explicit `Exit` from tray terminates the app.
 - Analyzer and test suite pass locally on Windows.
@@ -39,8 +39,9 @@ Latest desktop popup work:
   or closes immediately when dismissed manually.
 - Generated plugins are registered for secondary Flutter engines on Windows.
 - Persian popup content uses RTL layout and localized controls.
-- The reminder catalog now uses a consistent set of semi-realistic WebP
-  movement illustrations for all twelve current reminders.
+- The reminder catalog now contains 16 aligned English/Persian reminders.
+- Six movement reminders use original 4.2-second Animated WebP guides with
+  equivalent woman/man versions and reduced-motion stills.
 - English and Persian catalogs share each visual while keeping localized
   accessibility descriptions.
 
@@ -78,7 +79,7 @@ Current implementation:
 Future behavior:
 
 - The user should later be able to choose the popup position, such as bottom-right, bottom-left, top-right, or top-left.
-- The popup should support more natural animated movement assets.
+- Additional reminders should adopt reviewed animated movement assets.
 
 See:
 
@@ -86,12 +87,13 @@ See:
 
 ## Visual guidance direction
 
-The current SVG illustrations are placeholders. Production visuals should be more natural and preferably animated, similar to ergonomic movement instruction diagrams.
+The active catalog uses semi-realistic static WebP illustrations and a reviewed
+Animated WebP pilot. Legacy SVG illustrations remain available as fallbacks.
 
 Preferred asset order:
 
 1. Lottie JSON for short looping movement guidance.
-2. Animated WebP or GIF where Lottie is not available.
+2. Animated WebP where Lottie is not available.
 3. Static SVG or PNG as fallback.
 
 See:
@@ -137,6 +139,7 @@ See:
 ├── lib/                         # Flutter source
 ├── content/en/reminders.json     # English reminder content
 ├── content/fa/reminders.json     # Persian reminder content
+├── assets/animations/            # Animated guides and reduced-motion stills
 ├── assets/images/                # Current SVG reminder visuals
 ├── docs/                         # Product, runtime, visual, roadmap docs
 ├── scripts/init_github.ps1       # GitHub bootstrap commands

@@ -30,6 +30,10 @@ class Reminder {
     this.visualAsset,
     this.visualType = 'static_svg',
     this.visualDescription,
+    this.animationAsset,
+    this.animationAssetMale,
+    this.animationStillAsset,
+    this.animationStillAssetMale,
   });
 
   final String id;
@@ -45,6 +49,13 @@ class Reminder {
   final String? visualAsset;
   final String visualType;
   final String? visualDescription;
+  final String? animationAsset;
+  final String? animationAssetMale;
+  final String? animationStillAsset;
+  final String? animationStillAssetMale;
+
+  bool get hasMovementAnimation =>
+      animationAsset != null && animationStillAsset != null;
 
   factory Reminder.fromJson(Map<String, dynamic> json) {
     return Reminder(
@@ -67,6 +78,10 @@ class Reminder {
       visualAsset: json['visual_asset'] as String?,
       visualType: json['visual_type'] as String? ?? 'static_svg',
       visualDescription: json['visual_description'] as String?,
+      animationAsset: json['animation_asset'] as String?,
+      animationAssetMale: json['animation_asset_male'] as String?,
+      animationStillAsset: json['animation_still_asset'] as String?,
+      animationStillAssetMale: json['animation_still_asset_male'] as String?,
     );
   }
 

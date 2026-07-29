@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'desktop_shell_controller.dart';
+import 'guide_character.dart';
 import 'preferences_repository.dart';
 import 'reminder.dart';
 import 'reminder_art.dart';
@@ -29,6 +30,7 @@ Future<void> main(List<String> args) async {
       ReminderPopupWindowApp(
         reminder: popupArgs.reminder,
         language: popupArgs.language,
+        guideCharacter: popupArgs.guideCharacter,
       ),
     );
     return;
@@ -69,10 +71,12 @@ class ReminderPopupWindowApp extends StatefulWidget {
     super.key,
     required this.reminder,
     required this.language,
+    required this.guideCharacter,
   });
 
   final Reminder reminder;
   final ReminderLanguage language;
+  final GuideCharacter guideCharacter;
 
   @override
   State<ReminderPopupWindowApp> createState() => _ReminderPopupWindowAppState();
@@ -125,6 +129,7 @@ class _ReminderPopupWindowAppState extends State<ReminderPopupWindowApp> {
               child: ReminderPopup(
                 reminder: widget.reminder,
                 language: widget.language,
+                guideCharacter: widget.guideCharacter,
                 onDismiss: _closeWindow,
               ),
             ),
@@ -192,6 +197,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
   String _jobProfile = UserPreferences.initial().jobProfile;
   Duration _interval = UserPreferences.initial().interval;
   Duration _remaining = UserPreferences.initial().interval;
+  GuideCharacter _guideCharacter = UserPreferences.initial().guideCharacter;
   Timer? _timer;
   bool _running = false;
   bool _loading = true;
@@ -223,6 +229,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
       _jobProfile = _safeJobProfile(preferences.jobProfile);
       _interval = _safeInterval(preferences.interval);
       _remaining = _interval;
+      _guideCharacter = preferences.guideCharacter;
       _reminders = reminders;
       _nextIndex = 0;
       _activeReminder = _nextReminder();
@@ -273,6 +280,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
           language: _language,
           jobProfile: _jobProfile,
           interval: _interval,
+          guideCharacter: _guideCharacter,
         ),
       ),
     );
@@ -285,6 +293,7 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
           arguments: ReminderPopupArgs(
             reminder: reminder,
             language: _language,
+            guideCharacter: _guideCharacter,
           ).encode(),
           hiddenAtLaunch: true,
         ),
@@ -389,6 +398,13 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
     _savePreferences();
   }
 
+  void _changeGuideCharacter(GuideCharacter guideCharacter) {
+    if (_guideCharacter == guideCharacter) return;
+
+    setState(() => _guideCharacter = guideCharacter);
+    _savePreferences();
+  }
+
   String _copy(String en, String fa) =>
       _language == ReminderLanguage.fa ? fa : en;
 
@@ -453,6 +469,26 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                   ? const CircularProgressIndicator()
                   : ListView(
                       children: [
+                        Text(
+                          _copy('Movement guide', 'راهنمای حرکت'),
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 8),
+                        SegmentedButton<GuideCharacter>(
+                          segments: GuideCharacter.values
+                              .map(
+                                (character) => ButtonSegment<GuideCharacter>(
+                                  value: character,
+                                  label: Text(character.label(_language)),
+                                ),
+                              )
+                              .toList(growable: false),
+                          selected: <GuideCharacter>{_guideCharacter},
+                          onSelectionChanged: (selection) {
+                            _changeGuideCharacter(selection.first);
+                          },
+                        ),
+                        const SizedBox(height: 24),
                         Text(
                           _copy('Work profile', 'پروفایل کاری'),
                           style: Theme.of(context).textTheme.titleMedium,
@@ -534,7 +570,10 @@ class _ReminderHomePageState extends State<ReminderHomePage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      ReminderArt(reminder: reminder),
+                                      ReminderArt(
+                                        reminder: reminder,
+                                        guideCharacter: _guideCharacter,
+                                      ),
                                       const SizedBox(height: 16),
                                       Text(
                                         reminder.title,

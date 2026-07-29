@@ -1,6 +1,6 @@
 {
   "language": "fa",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -170,7 +170,11 @@
       "safety_note": "از وزنه استفاده نکنید و حرکت را با فشار انجام ندهید. در صورت درد، گزگز، بی‌حسی یا سرگیجه توقف کنید.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/shoulder_shrug_v3.webp",
-      "visual_description": "دو نمای روبه‌رو، شانه‌های رها و سپس بالا بردن ملایم شانه‌ها را همراه با پیکان رفت‌وبرگشت نشان می‌دهند."
+      "visual_description": "راهنما هر دو شانه را آرام بالا می‌برد، کمی مکث می‌کند و به حالت رها برمی‌گرداند.",
+      "animation_asset": "assets/animations/shoulder_shrug_v1.webp",
+      "animation_asset_male": "assets/animations/shoulder_shrug_male_v1.webp",
+      "animation_still_asset": "assets/animations/shoulder_shrug_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/shoulder_shrug_male_v1_still.webp"
     },
     {
       "id": "overhead-reach",
@@ -208,7 +212,11 @@
       "safety_note": "با دست صندلی را نکشید و زیاد خم نشوید. اگر صندلی حرکت می‌کند یا حرکت درد دارد، این نسخه نشسته را انجام ندهید.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/seated_side_reach_v3.webp",
-      "visual_description": "دو نمای نشسته روی صندلی ثابت، حالت صاف و سپس کشش جانبی کوچک با یک دست بالا را نشان می‌دهند."
+      "visual_description": "راهنمای نشسته یک دست را بالا می‌برد، کمی به پهلو خم می‌شود و روی صندلی ثابت به حالت صاف برمی‌گردد.",
+      "animation_asset": "assets/animations/seated_side_reach_v1.webp",
+      "animation_asset_male": "assets/animations/seated_side_reach_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_side_reach_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_side_reach_male_v1_still.webp"
     },
     {
       "id": "seated-torso-turn",
@@ -228,6 +236,98 @@
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/seated_torso_turn_v3.webp",
       "visual_description": "دو نمای نشسته، حالت رو به جلو و سپس چرخش کوچک بالاتنه را با پاها و لگن حمایت‌شده نشان می‌دهند."
+    },
+    {
+      "id": "seated-chest-opener",
+      "category": "upper_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 90,
+      "duration_seconds": 60,
+      "title": "بازکردن سینه در حالت نشسته",
+      "body": "صاف بنشینید، شانه‌ها را عقب و پایین ببرید و دست‌ها را آرام باز کنید تا وضعیت بسته پشت میز تغییر کند.",
+      "dose_label": "۵ تا ۱۰ ثانیه مکث • ۵ بار",
+      "instruction_steps": [
+        "روی صندلی ثابت و بدون چرخ بنشینید و هر دو پا را روی زمین بگذارید.",
+        "صاف بنشینید، شانه‌ها را پایین بیاورید و دست‌ها را پایین‌تر از سطح شانه باز کنید.",
+        "سینه را فقط کمی بالا بیاورید، عادی نفس بکشید و آرام به حالت اول برگردید."
+      ],
+      "safety_note": "دست‌ها را با فشار عقب نبرید و کمر را گود نکنید. اگر حرکت محدود یا دردناک است، آن را انجام ندهید.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/seated_chest_opener_v1_still.webp",
+      "visual_description": "راهنمای نشسته هر دو دست را پایین‌تر از سطح شانه باز می‌کند، سینه را کمی بالا می‌آورد و به حالت خنثی برمی‌گردد.",
+      "animation_asset": "assets/animations/seated_chest_opener_v1.webp",
+      "animation_asset_male": "assets/animations/seated_chest_opener_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_chest_opener_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_chest_opener_male_v1_still.webp"
+    },
+    {
+      "id": "seated-ankle-flex",
+      "category": "lower_body",
+      "job_profiles": ["office_computer", "call_center", "control_room", "driver"],
+      "interval_minutes": 60,
+      "duration_seconds": 60,
+      "title": "خم و صاف کردن مچ پا در حالت نشسته",
+      "body": "یک پا را در دامنه‌ای راحت جلو ببرید و پنجه را به‌آرامی دور و سپس به سمت ساق حرکت دهید.",
+      "dose_label": "۲ نوبت ۵تایی • برای هر پا",
+      "instruction_steps": [
+        "روی صندلی ثابت صاف بنشینید و یک پا را روی زمین نگه دارید.",
+        "پای دیگر را کمی جلو ببرید و زانو را قفل نکنید.",
+        "مچ را آرام به جلو و عقب حرکت دهید، پا را پایین بگذارید و سمت دیگر را انجام دهید."
+      ],
+      "safety_note": "دامنه حرکت راحت باشد. راننده فقط پس از توقف ایمن و پایان کار رانندگی این حرکت را انجام دهد. در صورت درد، بی‌حسی یا سرگیجه توقف کنید.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/seated_ankle_flex_v1_still.webp",
+      "visual_description": "راهنمای نشسته یک پا را جلو می‌برد و پنجه را آرام به دور و سپس به سمت ساق حرکت می‌دهد.",
+      "animation_asset": "assets/animations/seated_ankle_flex_v1.webp",
+      "animation_asset_male": "assets/animations/seated_ankle_flex_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_ankle_flex_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_ankle_flex_male_v1_still.webp"
+    },
+    {
+      "id": "sit-to-stand",
+      "category": "movement",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 120,
+      "duration_seconds": 45,
+      "title": "بلندشدن کنترل‌شده از صندلی",
+      "body": "با یک چرخه آرام بلندشدن و نشستن، پس از کار نشسته وضعیت بدن و پاها را تغییر دهید.",
+      "dose_label": "۵ تکرار آرام",
+      "instruction_steps": [
+        "از صندلی محکم و بدون چرخ استفاده کنید، پاها را به عرض لگن بگذارید و نزدیک نیمه جلویی بنشینید.",
+        "از لگن کمی رو به جلو متمایل شوید و با نیروی پاها و نگاه رو به جلو بلند شوید.",
+        "صاف بایستید و سپس آرام و کنترل‌شده دوباره روی صندلی بنشینید."
+      ],
+      "safety_note": "مطمئن شوید صندلی سر نمی‌خورد و اطراف خالی است. در صورت نیاز از دست‌ها برای هدایت استفاده کنید یا اگر بلندشدن بدون حمایت راحت نیست، حرکت را انجام ندهید.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/sit_to_stand_v1_still.webp",
+      "visual_description": "راهنما از روی صندلی ثابت کمی رو به جلو می‌آید، با نیروی پاها می‌ایستد و آرام می‌نشیند.",
+      "animation_asset": "assets/animations/sit_to_stand_v1.webp",
+      "animation_asset_male": "assets/animations/sit_to_stand_male_v1.webp",
+      "animation_still_asset": "assets/animations/sit_to_stand_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/sit_to_stand_male_v1_still.webp"
+    },
+    {
+      "id": "supported-calf-raise",
+      "category": "lower_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 120,
+      "duration_seconds": 30,
+      "title": "بالا آوردن پاشنه با تکیه",
+      "body": "برای حفظ تعادل از صندلی ثابت کمک بگیرید، هر دو پاشنه را آرام بالا ببرید و کنترل‌شده پایین بیاورید.",
+      "dose_label": "۵ تکرار آرام",
+      "instruction_steps": [
+        "پشت یک صندلی ثابت بایستید و پاها را موازی و به عرض لگن قرار دهید.",
+        "هر دو دست را سبک روی پشتی صندلی بگذارید و پاشنه‌ها را فقط تا دامنه راحت بالا ببرید.",
+        "کمی مکث کنید، پاشنه‌ها را آرام پایین بیاورید و بدن را صاف نگه دارید."
+      ],
+      "safety_note": "هر دو دست حمایت شوند و از صندلی چرخ‌دار یا لغزنده استفاده نکنید. در صورت درد، از دست‌دادن تعادل یا سرگیجه توقف کنید.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/supported_calf_raise_v1_still.webp",
+      "visual_description": "راهنمای ایستاده صندلی ثابت را می‌گیرد، هر دو پاشنه را باهم بالا می‌برد و آرام پایین می‌آورد.",
+      "animation_asset": "assets/animations/supported_calf_raise_v1.webp",
+      "animation_asset_male": "assets/animations/supported_calf_raise_male_v1.webp",
+      "animation_still_asset": "assets/animations/supported_calf_raise_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/supported_calf_raise_male_v1_still.webp"
     }
   ]
 }

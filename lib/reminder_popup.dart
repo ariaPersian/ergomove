@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'guide_character.dart';
 import 'reminder.dart';
 import 'reminder_art.dart';
 import 'reminder_guidance.dart';
@@ -9,11 +10,13 @@ class ReminderPopup extends StatelessWidget {
     super.key,
     required this.reminder,
     required this.language,
+    required this.guideCharacter,
     required this.onDismiss,
   });
 
   final Reminder reminder;
   final ReminderLanguage language;
+  final GuideCharacter guideCharacter;
   final VoidCallback onDismiss;
 
   @override
@@ -50,7 +53,11 @@ class ReminderPopup extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                ReminderArt(reminder: reminder, height: 150),
+                ReminderArt(
+                  reminder: reminder,
+                  height: 150,
+                  guideCharacter: guideCharacter,
+                ),
                 const SizedBox(height: 16),
                 Text(
                   reminder.title,

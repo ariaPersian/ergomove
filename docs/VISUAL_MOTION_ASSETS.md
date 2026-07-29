@@ -50,6 +50,32 @@ Instruction text remains outside the image. `dose_label` and
 `instruction_steps` are localized in the content catalogs and rendered below
 the shared artwork in both the main card and the popup.
 
+## Animated v4 movement guides
+
+The animation pilot and the product-owner image archive informed the first
+animated pack. Six reminders now have equivalent woman/man guides:
+
+- `shoulder-shrug-release`
+- `seated-side-reach`
+- `seated-chest-opener`
+- `seated-ankle-flex`
+- `sit-to-stand`
+- `supported-calf-raise`
+
+Each guide is an original six-frame Animated WebP:
+
+- three columns by two rows were used during generation and review;
+- the final file contains six 512 x 512 frames;
+- each frame lasts 700 ms, for a 4.2-second loop;
+- the selected guide is persisted locally and transferred to the desktop
+  popup;
+- reduced-motion mode uses a paired static start/peak WebP;
+- all words, dose labels, and safety instructions remain in localized UI.
+
+The supplied archive was used only to identify useful movement categories and
+clear pose patterns. Its posters, text, logos, watermarks, and artwork are not
+included.
+
 ## Reference direction
 
 The desired style is closer to ergonomic exercise instruction sheets: clear human posture, numbered or focused movements, and visible start/end direction. The reference image supplied by the product owner shows the intended direction: human exercise diagrams for eyes, shoulders, neck, wrists, back, and seated movement.
@@ -59,12 +85,12 @@ The desired style is closer to ergonomic exercise instruction sheets: clear huma
 Preferred order:
 
 1. Lottie JSON for short looping motion guidance.
-2. Animated WebP or GIF when Lottie production is not available.
+2. Animated WebP when Lottie production is not available.
 3. Static WebP, SVG, or PNG as a fallback.
 
-For future animation, prefer authored vector or skeletal motion over
-independently generated AI frames. Authored motion keeps anatomy, timing, and
-movement direction stable across the loop.
+For future animation, prefer authored vector or skeletal motion when production
+resources allow it. The current Animated WebP pilot uses reviewed six-frame
+sequences and paired still fallbacks.
 
 ## Content rules
 
@@ -99,12 +125,18 @@ The v2 set lives in:
 assets/images/realistic/
 ```
 
+The v4 animated guides and reduced-motion stills live in:
+
+```text
+assets/animations/
+```
+
 Both localized catalogs must point to the same asset for the same reminder ID,
 while providing their own localized `visual_description`.
 
 ## Future implementation notes
 
-Candidate package for animated assets:
+Candidate package for future vector-authored animated assets:
 
 - `lottie`
 
@@ -119,8 +151,12 @@ Suggested JSON fields:
 
 ```json
 {
-  "visual_type": "lottie",
-  "visual_asset": "assets/animations/neck_shoulders.json",
+  "visual_type": "static_webp",
+  "visual_asset": "assets/images/realistic/neck_shoulders_v2.webp",
+  "animation_asset": "assets/animations/neck_shoulders_v1.webp",
+  "animation_asset_male": "assets/animations/neck_shoulders_male_v1.webp",
+  "animation_still_asset": "assets/animations/neck_shoulders_v1_still.webp",
+  "animation_still_asset_male": "assets/animations/neck_shoulders_male_v1_still.webp",
   "visual_description": "Gentle neck and shoulder release animation."
 }
 ```
@@ -143,3 +179,5 @@ Manual checks:
 3. Persian and English reminders remain aligned by `id`.
 4. The app still works when minimized to the tray.
 5. The visual is readable at popup size.
+6. Woman/man selection persists and reaches the popup.
+7. Reduced-motion mode shows a still start/peak pair.
