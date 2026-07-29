@@ -1,6 +1,6 @@
 {
   "language": "en",
-  "version": "0.5.0",
+  "version": "0.7.0",
   "reminders": [
     {
       "id": "eye-20-20-20",
@@ -170,7 +170,11 @@
       "safety_note": "Use no weights and do not force the lift. Stop for pain, tingling, numbness, or dizziness.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/shoulder_shrug_v3.webp",
-      "visual_description": "Two front-facing poses show relaxed shoulders followed by a gentle shoulder shrug, with arrows indicating lift and release."
+      "visual_description": "A guide slowly raises both shoulders, pauses, and releases them to neutral.",
+      "animation_asset": "assets/animations/shoulder_shrug_v1.webp",
+      "animation_asset_male": "assets/animations/shoulder_shrug_male_v1.webp",
+      "animation_still_asset": "assets/animations/shoulder_shrug_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/shoulder_shrug_male_v1_still.webp"
     },
     {
       "id": "overhead-reach",
@@ -208,7 +212,11 @@
       "safety_note": "Do not pull on the chair or bend deeply. Skip this seated version if the chair can roll or the movement causes pain.",
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/seated_side_reach_v3.webp",
-      "visual_description": "Two seated poses show an upright start and a small one-arm side reach on a stable four-leg chair."
+      "visual_description": "A seated guide raises one arm, makes a small side reach, and returns upright on a stable chair.",
+      "animation_asset": "assets/animations/seated_side_reach_v1.webp",
+      "animation_asset_male": "assets/animations/seated_side_reach_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_side_reach_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_side_reach_male_v1_still.webp"
     },
     {
       "id": "seated-torso-turn",
@@ -228,6 +236,98 @@
       "visual_type": "static_webp",
       "visual_asset": "assets/images/realistic/seated_torso_turn_v3.webp",
       "visual_description": "Two seated poses show a forward start and a small upper-body turn with hips and feet supported."
+    },
+    {
+      "id": "seated-chest-opener",
+      "category": "upper_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 90,
+      "duration_seconds": 60,
+      "title": "Seated chest opener",
+      "body": "Sit tall, draw your shoulders back and down, and open your arms gently to change a closed desk posture.",
+      "dose_label": "Hold 5–10 seconds • repeat 5 times",
+      "instruction_steps": [
+        "Use a stable chair without wheels and place both feet flat.",
+        "Sit upright, lower your shoulders, and open both arms below shoulder height.",
+        "Lift your chest only slightly, breathe normally, then return with control."
+      ],
+      "safety_note": "Do not force your arms back or arch your lower back. Skip the movement if it is restricted or painful.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/seated_chest_opener_v1_still.webp",
+      "visual_description": "A seated guide opens both arms below shoulder height, gently lifts the chest, and returns to neutral.",
+      "animation_asset": "assets/animations/seated_chest_opener_v1.webp",
+      "animation_asset_male": "assets/animations/seated_chest_opener_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_chest_opener_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_chest_opener_male_v1_still.webp"
+    },
+    {
+      "id": "seated-ankle-flex",
+      "category": "lower_body",
+      "job_profiles": ["office_computer", "call_center", "control_room", "driver"],
+      "interval_minutes": 60,
+      "duration_seconds": 60,
+      "title": "Seated ankle flex and point",
+      "body": "Straighten one leg comfortably and alternate pointing the toes away and drawing them back toward the shin.",
+      "dose_label": "2 sets of 5 • each foot",
+      "instruction_steps": [
+        "Sit upright on a stable chair and keep one foot flat.",
+        "Straighten the other leg a short distance without locking the knee.",
+        "Point and flex the ankle slowly, lower the foot, and change sides."
+      ],
+      "safety_note": "Keep the range comfortable. Drivers must be safely parked with the driving task finished. Stop for pain, numbness, or dizziness.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/seated_ankle_flex_v1_still.webp",
+      "visual_description": "A seated guide extends one leg and slowly alternates the foot between pointing away and flexing back.",
+      "animation_asset": "assets/animations/seated_ankle_flex_v1.webp",
+      "animation_asset_male": "assets/animations/seated_ankle_flex_male_v1.webp",
+      "animation_still_asset": "assets/animations/seated_ankle_flex_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/seated_ankle_flex_male_v1_still.webp"
+    },
+    {
+      "id": "sit-to-stand",
+      "category": "movement",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 120,
+      "duration_seconds": 45,
+      "title": "Controlled sit to stand",
+      "body": "Use one slow sit-to-stand cycle to change position and move your legs after seated work.",
+      "dose_label": "5 slow repetitions",
+      "instruction_steps": [
+        "Use a solid chair without wheels, place your feet hip-width apart, and sit near the front half.",
+        "Lean forward slightly from the hips and stand using your legs while looking ahead.",
+        "Stand tall, then lower yourself back to the chair slowly and with control."
+      ],
+      "safety_note": "Make sure the chair cannot slide and the area is clear. Use your hands for guidance or skip the movement if standing without support is not comfortable.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/sit_to_stand_v1_still.webp",
+      "visual_description": "A guide leans forward from a stable chair, stands using the legs, and sits down slowly.",
+      "animation_asset": "assets/animations/sit_to_stand_v1.webp",
+      "animation_asset_male": "assets/animations/sit_to_stand_male_v1.webp",
+      "animation_still_asset": "assets/animations/sit_to_stand_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/sit_to_stand_male_v1_still.webp"
+    },
+    {
+      "id": "supported-calf-raise",
+      "category": "lower_body",
+      "job_profiles": ["office_computer", "call_center", "control_room"],
+      "interval_minutes": 120,
+      "duration_seconds": 30,
+      "title": "Supported calf raise",
+      "body": "Use a stable chair for balance and raise both heels slowly before lowering them with control.",
+      "dose_label": "5 slow repetitions",
+      "instruction_steps": [
+        "Stand behind a stable chair with both feet parallel and hip-width apart.",
+        "Rest both hands lightly on the chair and raise both heels only as far as comfortable.",
+        "Pause briefly, lower both heels slowly, and keep your body upright."
+      ],
+      "safety_note": "Keep both hands supported and do not use a chair that can roll or slide. Stop for pain, loss of balance, or dizziness.",
+      "visual_type": "static_webp",
+      "visual_asset": "assets/animations/supported_calf_raise_v1_still.webp",
+      "visual_description": "A standing guide holds a stable chair, raises both heels together, pauses, and lowers them.",
+      "animation_asset": "assets/animations/supported_calf_raise_v1.webp",
+      "animation_asset_male": "assets/animations/supported_calf_raise_male_v1.webp",
+      "animation_still_asset": "assets/animations/supported_calf_raise_v1_still.webp",
+      "animation_still_asset_male": "assets/animations/supported_calf_raise_male_v1_still.webp"
     }
   ]
 }

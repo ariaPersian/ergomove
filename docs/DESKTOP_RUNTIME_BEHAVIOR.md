@@ -69,13 +69,17 @@ Current implementation status:
 
 - The current implementation creates a dedicated desktop popup window using `desktop_multi_window`.
 - The popup window receives a serialized `Reminder` payload through `lib/reminder_popup_args.dart`.
-- The popup payload carries the selected language so Persian content uses RTL layout and localized controls.
+- The popup payload carries the selected language and woman/man movement-guide
+  preference so Persian content uses RTL controls and both windows render the
+  same guide.
 - The popup window uses `ReminderPopup`, `ReminderArt`, and
   `ReminderGuidance`, so it shows the same visual, dose, steps, and safety note
   as the main reminder card.
 - The popup window is configured with `window_manager` as always-on-top, hidden from the taskbar, fixed size, and aligned to bottom-right.
 - The popup auto-dismisses after the reminder duration, clamped to 20–60
   seconds, or when the user presses its close button.
+- Animated WebP guides loop in the main card and popup. When the platform asks
+  for reduced motion, both surfaces render the paired static start/peak image.
 - The Windows runner registers generated plugins for every secondary Flutter engine created by `desktop_multi_window`.
 
 Implementation files:
@@ -98,13 +102,14 @@ Each popup owns a separate Flutter engine. Keep the
 
 ## Visual motion behavior
 
-The current SVG images are placeholders. Production reminder visuals should be more natural and, where useful, animated.
+The active catalog uses natural static WebP illustrations and a reviewed
+Animated WebP pilot. Legacy SVG images remain available as fallbacks.
 
 Preferred visual asset order:
 
 1. Lottie JSON for short looping movement guidance.
-2. Animated WebP or GIF if Lottie is not available.
-3. Static SVG or PNG as fallback.
+2. Animated WebP if Lottie is not available.
+3. Static WebP, SVG, or PNG as fallback.
 
 Visual requirements:
 
@@ -113,6 +118,8 @@ Visual requirements:
 - Keep movements slow, low-risk, and non-medical.
 - Avoid treatment, diagnosis, or pain-relief claims.
 - Keep the asset linked to the reminder by `visual_asset` in the JSON catalog.
+- Keep woman/man animation and reduced-motion asset fields aligned in the
+  English and Persian catalogs.
 
 ## Manual validation checklist
 
@@ -145,3 +152,6 @@ Then validate:
     seconds.
 15. The popup close button dismisses it immediately.
 16. Persian popup content is RTL and its close tooltip is localized.
+17. Changing the movement guide between woman and man persists after restart.
+18. Animated reminders use the same selected guide in the card and popup.
+19. Windows reduced-motion mode shows a static start/peak pair.

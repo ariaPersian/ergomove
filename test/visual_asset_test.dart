@@ -4,6 +4,15 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  const animatedReminderIds = <String>{
+    'shoulder-shrug-release',
+    'seated-side-reach',
+    'seated-chest-opener',
+    'seated-ankle-flex',
+    'sit-to-stand',
+    'supported-calf-raise',
+  };
+
   test('localized reminder visual assets exist and stay aligned', () {
     final english = _readReminders('content/en/reminders.json');
     final persian = _readReminders('content/fa/reminders.json');
@@ -34,6 +43,35 @@ void main() {
         isA<String>().having((value) => value.isNotEmpty, 'not empty', true),
         reason: id,
       );
+
+      final animationKeys = <String>[
+        'animation_asset',
+        'animation_asset_male',
+        'animation_still_asset',
+        'animation_still_asset_male',
+      ];
+
+      if (animatedReminderIds.contains(id)) {
+        for (final key in animationKeys) {
+          final animationAsset = englishReminder[key] as String?;
+          expect(animationAsset, isNotNull, reason: '$id: $key');
+          expect(
+            File(animationAsset!).existsSync(),
+            isTrue,
+            reason: animationAsset,
+          );
+          expect(
+            persianReminder[key],
+            animationAsset,
+            reason: '$id: $key',
+          );
+        }
+      } else {
+        for (final key in animationKeys) {
+          expect(englishReminder[key], isNull, reason: '$id: $key');
+          expect(persianReminder[key], isNull, reason: '$id: $key');
+        }
+      }
     }
   });
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'guide_character.dart';
+import 'movement_animation.dart';
 import 'reminder.dart';
 
 class ReminderArt extends StatelessWidget {
@@ -8,15 +10,25 @@ class ReminderArt extends StatelessWidget {
     super.key,
     required this.reminder,
     this.height = 180,
+    this.guideCharacter = GuideCharacter.female,
   });
 
   final Reminder reminder;
   final double height;
+  final GuideCharacter guideCharacter;
 
   @override
   Widget build(BuildContext context) {
     final asset = reminder.visualAsset ?? assetForCategory(reminder.category);
     final isSvg = asset?.toLowerCase().endsWith('.svg') ?? false;
+    final animationAsset = guideCharacter == GuideCharacter.male
+        ? reminder.animationAssetMale ?? reminder.animationAsset
+        : reminder.animationAsset;
+    final animationStillAsset = guideCharacter == GuideCharacter.male
+        ? reminder.animationStillAssetMale ?? reminder.animationStillAsset
+        : reminder.animationStillAsset;
+    final hasAnimation =
+        animationAsset != null && animationStillAsset != null;
 
     return Semantics(
       label: reminder.visualDescription ?? reminder.title,
@@ -36,7 +48,12 @@ class ReminderArt extends StatelessWidget {
                 size: 96,
                 color: Theme.of(context).colorScheme.primary,
               )
-            : _assetImage(asset, isSvg),
+            : hasAnimation
+                ? MovementAnimation(
+                    animatedAsset: animationAsset!,
+                    stillAsset: animationStillAsset!,
+                  )
+                : _assetImage(asset, isSvg),
       ),
     );
   }
