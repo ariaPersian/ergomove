@@ -50,8 +50,8 @@ class ReminderArt extends StatelessWidget {
               )
             : hasAnimation
                 ? MovementAnimation(
-                    animatedAsset: animationAsset!,
-                    stillAsset: animationStillAsset!,
+                    animatedAsset: animationAsset,
+                    stillAsset: animationStillAsset,
                   )
                 : _assetImage(asset, isSvg),
       ),
